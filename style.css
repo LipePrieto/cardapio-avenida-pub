@@ -1,147 +1,280 @@
+/* ============================================
+   AVENIDA PUB BOCAINA - STYLE PREMIUM
+   Dark Mode | Neon Laranja | Glassmorphism
+   ============================================ */
+
+/* Reset e base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    background-color: #0a0a0a;
-    background-image: radial-gradient(circle at 25% 40%, rgba(25, 20, 15, 0.6) 0%, #030303 100%);
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Poppins', 'Helvetica Neue', sans-serif;
-    color: #ecedee;
-    line-height: 1.4;
-    scroll-behavior: smooth;
-}
-
-/* Smooth scroll & font smoothing */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 20px;
 }
 
-/* container principal */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #050505;
+    color: #ecedee;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* Container principal */
 .container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 1.5rem 1.2rem 3rem;
+    padding: 0 1.5rem;
 }
 
-/* ========= HEADER PREMIUM ========= */
+/* ========== HERO SECTION ========== */
 .hero {
-    text-align: center;
-    padding: 2rem 0.5rem 2.5rem;
-    border-bottom: 1px solid rgba(255, 140, 0, 0.25);
-    margin-bottom: 2.5rem;
     position: relative;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 10%;
-    width: 80%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #ff8c00, #ffb347, #ff8c00, transparent);
-    border-radius: 4px;
-}
-
-.pub-badge {
-    display: inline-block;
-    background: rgba(255, 140, 0, 0.12);
-    backdrop-filter: blur(4px);
-    padding: 0.3rem 1rem;
-    border-radius: 40px;
-    font-size: 0.75rem;
-    letter-spacing: 1.5px;
-    font-weight: 500;
-    color: #ffb347;
-    margin-bottom: 1rem;
-    border: 0.5px solid rgba(255, 140, 0, 0.3);
-    text-transform: uppercase;
-}
-
-h1 {
-    font-size: 3.2rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #FFFFFF 0%, #FFD1A0 80%, #FF9F3D 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.tagline {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #b0a79e;
-    max-width: 500px;
-    margin: 0.75rem auto 0;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    text-align: center;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%231a0a00"/><stop offset="100%" style="stop-color:%23000000"/></linearGradient><pattern id="noise" patternUnits="userSpaceOnUse" width="200" height="200"><rect width="200" height="200" fill="url(%23grad)"/><text x="50" y="100" font-size="80" fill="%23ff8c0020">🍺</text><text x="120" y="160" font-size="60" fill="%23ffaa3320">🍻</text></pattern></defs><rect width="100%" height="100%" fill="url(%23grad)"/><rect width="100%" height="100%" fill="url(%23noise)" opacity="0.3"/></svg>') no-repeat center center/cover;
+    position: relative;
 }
 
-.tagline span {
-    background: #1e1b18;
-    padding: 0.2rem 0.7rem;
-    border-radius: 30px;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 140, 0, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1.5rem;
+    border-radius: 40px;
     font-size: 0.75rem;
+    letter-spacing: 2px;
     font-weight: 500;
-    color: #ffa559;
+    color: #ffb347;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
 }
 
-/* ===== SEÇÃO CERVEJAS ===== */
-.section-title {
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.title-line {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFD1A0 50%, #FF9F3D 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: block;
+}
+
+.title-location {
+    background: linear-gradient(135deg, #FF9F3D 0%, #FF6B00 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: block;
+    font-size: 3rem;
+}
+
+.hero-divider {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.hero-divider span {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff8c00, transparent);
+}
+
+.hero-divider i {
+    color: #ff8c00;
+    font-size: 1.2rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #c9c9c9;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
     flex-wrap: wrap;
-    margin: 2rem 0 1.5rem 0;
-    border-left: 4px solid #ff8c00;
-    padding-left: 1rem;
+    margin-bottom: 2rem;
 }
 
-.section-title h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    color: #f5f2ef;
-}
-
-.section-title .volume-badge {
+.hero-tags span {
+    background: rgba(255, 140, 0, 0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
     font-size: 0.8rem;
-    background: rgba(255, 140, 0, 0.2);
-    padding: 0.2rem 0.8rem;
-    border-radius: 20px;
-    font-weight: 500;
-    color: #ffbc6e;
+    color: #ffb347;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 140, 0, 0.2);
 }
 
-/* Grid responsivo - cards premium */
-.beer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff8c00, #ff6b00);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.5);
+    gap: 0.8rem;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    border: 1px solid rgba(255, 140, 0, 0.5);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 140, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #ffb347;
+    font-size: 0.8rem;
+    animation: bounce 2s infinite;
+}
+
+.hero-scroll-indicator i {
+    display: block;
+    margin-top: 0.3rem;
+}
+
+/* ========== SEÇÃO CARDÁPIO ========== */
+.menu-section {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+}
+
+.section-header {
+    text-align: center;
     margin-bottom: 3rem;
 }
 
-/* cartão estilo moderno pub */
+.section-header.text-left {
+    text-align: left;
+}
+
+.section-subtitle {
+    color: #ff8c00;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.section-title i {
+    color: #ff8c00;
+    font-size: 2rem;
+}
+
+.section-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff8c00, #ff6b00);
+    margin: 1rem auto 0;
+    border-radius: 3px;
+}
+
+.section-divider.left {
+    margin: 1rem 0 0 0;
+}
+
+/* Grid de Cervejas */
+.beer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* Card de Cerveja */
 .beer-card {
-    background: rgba(18, 18, 20, 0.85);
-    backdrop-filter: blur(2px);
-    border-radius: 28px;
-    padding: 1.2rem 1.2rem 1.2rem 1.4rem;
+    background: rgba(20, 20, 25, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 1.5rem;
     transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    border: 1px solid rgba(50, 45, 40, 0.6);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 140, 0, 0.15);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: default;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
 }
@@ -153,35 +286,31 @@ h1 {
     left: 0;
     width: 4px;
     height: 100%;
-    background: #ff8c00;
+    background: linear-gradient(180deg, #ff8c00, #ff6b00);
     transform: scaleY(0);
-    transition: transform 0.25s ease;
+    transition: transform 0.3s ease;
     transform-origin: bottom;
 }
 
 .beer-card:hover {
-    transform: translateY(-6px) scale(1.01);
-    border-color: rgba(255, 140, 0, 0.5);
-    background: rgba(25, 24, 28, 0.95);
-    box-shadow: 0 20px 28px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 140, 0, 0.2);
+    transform: translateY(-8px);
+    border-color: rgba(255, 140, 0, 0.4);
+    background: rgba(30, 30, 35, 0.95);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 140, 0, 0.2);
 }
 
 .beer-card:hover::before {
     transform: scaleY(1);
 }
 
-/* info esquerda */
 .beer-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+    flex: 1;
 }
 
 .beer-name {
-    font-size: 1.35rem;
-    font-weight: 650;
-    letter-spacing: -0.2px;
-    color: #f8f4f0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f5f5f5;
     transition: color 0.2s;
 }
 
@@ -189,101 +318,367 @@ h1 {
     color: #ffb347;
 }
 
-.beer-type-hint {
+.beer-volume {
     font-size: 0.7rem;
-    font-weight: 400;
-    color: #a5988c;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
+    color: #ff8c00;
+    margin-top: 0.25rem;
+    letter-spacing: 1px;
 }
 
-/* preço lado direito */
 .beer-price {
     text-align: right;
 }
 
 .price-value {
-    font-size: 1.7rem;
-    font-weight: 700;
-    background: linear-gradient(145deg, #FFD9B5, #FFAA4A);
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FFD9B5, #FFAA4A);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    letter-spacing: -0.5px;
 }
 
 .price-currency {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #c9aa7b;
+    color: #ffaa55;
     margin-right: 2px;
 }
 
-/* elementos decorativos */
-.glass-icon {
-    font-size: 1.3rem;
-    opacity: 0.4;
-    transition: opacity 0.2s;
+.beer-icon {
+    font-size: 2rem;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    margin-top: 0.5rem;
 }
 
-.beer-card:hover .glass-icon {
-    opacity: 0.9;
+.beer-card:hover .beer-icon {
+    opacity: 0.8;
     color: #ff8c00;
 }
 
-/* Footer elegante */
-.footer {
-    margin-top: 4rem;
-    padding: 2rem 1rem 1.5rem;
-    border-top: 1px solid rgba(255, 140, 0, 0.2);
+.menu-note {
     text-align: center;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 48px 48px 20px 20px;
-    backdrop-filter: blur(3px);
+    padding: 1.5rem;
+    background: rgba(255, 140, 0, 0.05);
+    border-radius: 16px;
+    color: #ccaa7a;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 140, 0, 0.15);
+}
+
+.menu-note i {
+    color: #ff8c00;
+}
+
+/* ========== SEÇÃO SOBRE ========== */
+.about-section {
+    padding: 5rem 0;
+    background: #0a0a0a;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.about-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #b0b0b0;
+    margin: 1.5rem 0;
+}
+
+.info-card {
+    background: rgba(20, 20, 25, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    margin: 1.5rem 0;
+}
+
+.info-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: #ff8c00;
+    margin-top: 0.25rem;
+}
+
+.info-item h4 {
+    font-size: 0.9rem;
+    color: #ffb347;
+    margin-bottom: 0.3rem;
+}
+
+.info-item p, .info-item a {
+    font-size: 0.85rem;
+    color: #c0c0c0;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.info-item a:hover {
+    color: #ff8c00;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #ff8c00, #ff6b00);
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+    gap: 0.8rem;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.feature-card {
+    background: rgba(20, 20, 25, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1.8rem;
+    text-align: center;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 140, 0, 0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 140, 0, 0.3);
+    background: rgba(30, 30, 35, 0.8);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: #ff8c00;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.feature-card p {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* ========== SEÇÃO MAPA ========== */
+.map-section {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+}
+
+.map-wrapper {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+.google-map {
+    width: 100%;
+    height: 400px;
+    border: none;
+    display: block;
+}
+
+.map-info {
+    text-align: center;
+}
+
+.map-address-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(20, 20, 25, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid rgba(255, 140, 0, 0.2);
+}
+
+.map-address-card i {
+    font-size: 1.3rem;
+    color: #ff8c00;
+}
+
+.map-address-card p {
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.map-link-btn {
+    background: rgba(255, 140, 0, 0.15);
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    color: #ffb347;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.map-link-btn:hover {
+    background: rgba(255, 140, 0, 0.3);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    background: #020202;
+    padding: 3rem 0 1.5rem;
+    border-top: 1px solid rgba(255, 140, 0, 0.2);
 }
 
 .footer-content {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 2rem;
 }
 
-.pub-logo-footer {
-    font-size: 1.6rem;
-    font-weight: 600;
-    background: linear-gradient(130deg, #ffbc6e, #ff8c2c);
+.footer-logo {
+    text-align: center;
+}
+
+.footer-logo h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #ffb347);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    letter-spacing: -0.5px;
 }
 
-.footer-details {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    font-size: 0.75rem;
-    color: #aa9f92;
+.footer-logo p {
+    font-size: 0.9rem;
+    color: #ff8c00;
+    letter-spacing: 2px;
 }
 
-.footer-details span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.footer-copy {
+.footer-tagline {
     font-size: 0.7rem;
-    color: #6b6258;
+    color: #666;
+    display: block;
     margin-top: 0.5rem;
 }
 
-/* animação sutil de entrada */
-@keyframes fadeSlideUp {
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.footer-column h4 {
+    font-size: 0.9rem;
+    color: #ffb347;
+    margin-bottom: 0.8rem;
+}
+
+.footer-column p, .footer-column a {
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.6;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-column a:hover {
+    color: #ff8c00;
+}
+
+.footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom p {
+    font-size: 0.7rem;
+    color: #555;
+}
+
+.footer-developer {
+    margin-top: 0.5rem;
+}
+
+.footer-developer i {
+    color: #ff6b6b;
+}
+
+/* ========== BACK TO TOP BUTTON ========== */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff8c00, #ff6b00);
+    border: none;
+    color: #000;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.5);
+}
+
+/* ========== ANIMAÇÕES ========== */
+@keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(18px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -291,77 +686,124 @@ h1 {
     }
 }
 
-.beer-card {
-    animation: fadeSlideUp 0.4s ease backwards;
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
 }
 
-/* delay para cada card (gerado dinamicamente por nth-child) */
-.beer-card:nth-child(1) { animation-delay: 0.02s; }
-.beer-card:nth-child(2) { animation-delay: 0.06s; }
-.beer-card:nth-child(3) { animation-delay: 0.1s; }
-.beer-card:nth-child(4) { animation-delay: 0.14s; }
-.beer-card:nth-child(5) { animation-delay: 0.18s; }
-.beer-card:nth-child(6) { animation-delay: 0.22s; }
-.beer-card:nth-child(7) { animation-delay: 0.26s; }
-.beer-card:nth-child(8) { animation-delay: 0.30s; }
-.beer-card:nth-child(9) { animation-delay: 0.34s; }
-.beer-card:nth-child(10) { animation-delay: 0.38s; }
+/* Animação de entrada dos cards */
+.beer-card {
+    animation: fadeInUp 0.5s ease backwards;
+}
 
-/* responsividade refinada */
-@media (max-width: 640px) {
-    .container {
-        padding: 1rem 1rem 2rem;
+.beer-card:nth-child(1) { animation-delay: 0.05s; }
+.beer-card:nth-child(2) { animation-delay: 0.1s; }
+.beer-card:nth-child(3) { animation-delay: 0.15s; }
+.beer-card:nth-child(4) { animation-delay: 0.2s; }
+.beer-card:nth-child(5) { animation-delay: 0.25s; }
+.beer-card:nth-child(6) { animation-delay: 0.3s; }
+.beer-card:nth-child(7) { animation-delay: 0.35s; }
+.beer-card:nth-child(8) { animation-delay: 0.4s; }
+.beer-card:nth-child(9) { animation-delay: 0.45s; }
+.beer-card:nth-child(10) { animation-delay: 0.5s; }
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 968px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
-    h1 {
-        font-size: 2.5rem;
+    
+    .hero-title {
+        font-size: 2.8rem;
     }
-    .section-title h2 {
-        font-size: 1.5rem;
+    
+    .title-location {
+        font-size: 2.2rem;
     }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
     .beer-grid {
-        gap: 1rem;
         grid-template-columns: 1fr;
     }
-    .beer-card {
-        padding: 1rem 1.2rem;
-    }
-    .price-value {
-        font-size: 1.5rem;
-    }
-    .beer-name {
-        font-size: 1.2rem;
-    }
-    .hero {
-        padding: 1.5rem 0.2rem 2rem;
-    }
 }
 
-@media (min-width: 641px) and (max-width: 900px) {
-    .beer-grid {
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 80%;
+        justify-content: center;
+    }
+    
+    .hero-tags {
+        gap: 0.5rem;
+    }
+    
+    .hero-tags span {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .about-features {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .map-address-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 20px;
+    }
+    
+    .google-map {
+        height: 300px;
+    }
+    
+    .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
 }
 
-/* scrollbar custom */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    background: #141210;
-}
-::-webkit-scrollbar-thumb {
-    background: #ff8c2c;
-    border-radius: 8px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #ffaa55;
-}
-
-/* destaque extra */
-.price-value small {
-    font-size: 0.7rem;
-    font-weight: 400;
-    background: none;
-    -webkit-background-clip: unset;
-    color: #bd9e78;
-}
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .title-location {
+        font-size: 1.6rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .beer-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .beer-price {
+        text-align: center;
+    }
+    
+   
