@@ -80,12 +80,10 @@ const createBeerCards = () => {
 
 // Função para corrigir o mapa (coordenadas aproximadas de Bocaina - SP)
 const fixMapCoordinates = () => {
-    // Coordenadas aproximadas de Bocaina - SP
-    // Latitude: -22.1365, Longitude: -48.5180
     const mapFrame = document.querySelector('.google-map');
-    if (mapFrame) {
-        const embedUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.456789012345!2d-48.521234!3d-22.139876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c68b2a5b6c7d8f%3A0x123456789abcdef!2sR.%20Pref.%20Guilherme%20Giraide%20Ferreira%20Canpam%2C%20626%20-%20Bocaina%2C%20SP%2C%2017245-128!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr`;
-        mapFrame.src = embedUrl;
+    if (mapFrame && mapFrame.src.includes('pb=!1m18')) {
+        // O mapa já está configurado corretamente no HTML
+        console.log('🗺️ Mapa carregado com sucesso');
     }
 };
 
@@ -156,18 +154,6 @@ const smoothNavigation = () => {
     });
 };
 
-// Função para adicionar efeito de glassmorphism dinâmico no header
-const dynamicHeaderEffect = () => {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const opacity = Math.min(scrolled / 500, 0.95);
-        hero.style.setProperty('--scroll-opacity', opacity);
-    });
-};
-
 // Função para adicionar tooltips nos ícones das redes sociais
 const addTooltips = () => {
     const socialLinks = document.querySelectorAll('.social-link, .footer-social-link');
@@ -189,11 +175,12 @@ const showConsoleArt = () => {
     ║   ✨ Design Premium | Dark Mode       ║
     ║   📱 Totalmente Responsivo            ║
     ║   🎨 Neon Laranja & Dourado           ║
+    ║   ⚽ Transmissão de Jogos             ║
     ╚═══════════════════════════════════════╝
     `);
 };
 
-// Função para adicionar data atual no footer (opcional)
+// Função para adicionar data atual no footer
 const addCurrentYear = () => {
     const yearElement = document.querySelector('.footer-bottom p:first-child');
     if (yearElement) {
@@ -220,9 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Configura navegação suave
     smoothNavigation();
-    
-    // Efeito dinâmico no header
-    dynamicHeaderEffect();
     
     // Adiciona tooltips
     addTooltips();
@@ -251,8 +235,8 @@ window.addEventListener('mousemove', (e) => {
     }
 });
 
-// Previne o comportamento padrão de arrastar imagens (opcional)
-document.querySelectorAll('img, .beer-card').forEach(el => {
+// Previne o comportamento padrão de arrastar elementos
+document.querySelectorAll('.beer-card, .feature-card').forEach(el => {
     el.addEventListener('dragstart', (e) => {
         e.preventDefault();
     });
