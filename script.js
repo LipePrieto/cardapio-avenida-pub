@@ -1,20 +1,21 @@
 /**
  * AVENIDA PUB BOCAINA
- * Script principal - Otimizado para Safari (iOS) e Chrome (Android)
+ * Script principal - Com Skeleton Screen e Mais Pedidas
+ * Brahma e Boa são as mais pedidas 🔥
  */
 
-// Dados das cervejas
+// Dados das cervejas (Brahma e Boa são as mais pedidas)
 const beers = [
-    { name: "Heineken", price: 14, style: "Lager Premium" },
-    { name: "Corona", price: 14, style: "Pilsener Leve" },
-    { name: "Stella Artois", price: 13, style: "Puro Malte" },
-    { name: "Spaten", price: 12, style: "München Lager" },
-    { name: "Original", price: 11, style: "Leve & Refrescante" },
-    { name: "Budweiser", price: 10, style: "Lager Americana" },
-    { name: "Boa", price: 10, style: "Puro Sabor" },
-    { name: "Brahma", price: 10, style: "Clássica Brasileira" },
-    { name: "Skol", price: 10, style: "Leveza Única" },
-    { name: "Amstel", price: 10, style: "Sabor Encorpado" }
+    { name: "Heineken", price: 14, style: "Lager Premium", top: false },
+    { name: "Corona", price: 14, style: "Pilsener Leve", top: false },
+    { name: "Stella Artois", price: 13, style: "Puro Malte", top: false },
+    { name: "Spaten", price: 12, style: "München Lager", top: false },
+    { name: "Original", price: 11, style: "Leve & Refrescante", top: false },
+    { name: "Budweiser", price: 10, style: "Lager Americana", top: false },
+    { name: "Boa", price: 10, style: "Puro Sabor", top: true },      // 🔥 Mais Pedida
+    { name: "Brahma", price: 10, style: "Clássica Brasileira", top: true }, // 🔥 Mais Pedida
+    { name: "Skol", price: 10, style: "Leveza Única", top: false },
+    { name: "Amstel", price: 10, style: "Sabor Encorpado", top: false }
 ];
 
 // Elementos DOM
@@ -28,7 +29,32 @@ const formatPrice = (price) => {
     });
 };
 
-// Criar cards das cervejas
+// Simular carregamento com Skeleton Screen
+const showSkeleton = () => {
+    const skeleton = document.getElementById('skeletonLoader');
+    const beerList = document.getElementById('beerList');
+    const sinucaCard = document.getElementById('sinucaCard');
+    const menuNote = document.getElementById('menuNote');
+    
+    if (skeleton) skeleton.style.display = 'flex';
+    if (beerList) beerList.style.display = 'none';
+    if (sinucaCard) sinucaCard.style.display = 'none';
+    if (menuNote) menuNote.style.display = 'none';
+};
+
+const hideSkeleton = () => {
+    const skeleton = document.getElementById('skeletonLoader');
+    const beerList = document.getElementById('beerList');
+    const sinucaCard = document.getElementById('sinucaCard');
+    const menuNote = document.getElementById('menuNote');
+    
+    if (skeleton) skeleton.style.display = 'none';
+    if (beerList) beerList.style.display = 'flex';
+    if (sinucaCard) sinucaCard.style.display = 'block';
+    if (menuNote) menuNote.style.display = 'flex';
+};
+
+// Criar cards das cervejas com selo "Mais Pedida"
 const createBeerCards = () => {
     const beerContainer = document.getElementById('beerList');
     if (!beerContainer) return;
@@ -58,12 +84,21 @@ const createBeerCards = () => {
             </div>
         `;
         
-        // Evento de toque/clique compatível com todos navegadores
+        // Adiciona selo "Mais Pedida" para Brahma e Boa
+        if (beer.top) {
+            const topBadge = document.createElement('div');
+            topBadge.className = 'top-badge';
+            topBadge.textContent = 'Mais Pedida';
+            card.appendChild(topBadge);
+        }
+        
+        // Evento de toque/clique
         card.addEventListener('click', () => {
             card.style.transform = 'scale(0.98)';
             setTimeout(() => {
                 card.style.transform = '';
             }, 150);
+            console.log(`🍺 ${beer.name} selecionada - R$ ${formatPrice(beer.price)}`);
         });
         
         beerContainer.appendChild(card);
@@ -236,18 +271,25 @@ const fixSafariVH = () => {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
 
-window.addEventListener('resize', fixSafariVH);
-fixSafariVH();
-
 // ========== INICIALIZAÇÃO ==========
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Avenida Pub Bocaina - Inicializando...');
     
-    createBeerCards();
-    animateOnScroll();
+    // Mostra skeleton screen
+    showSkeleton();
+    
+    // Simula carregamento (igual a um carregamento real)
+    setTimeout(() => {
+        createBeerCards();
+        animateOnScroll();
+        hideSkeleton();
+        console.log('✅ Cardápio carregado! Brahma e Boa são as mais pedidas 🔥');
+    }, 800); // 800ms de carregamento simulado
+    
     backToTopButton();
     smoothNavigation();
     addCurrentYear();
+    fixSafariVH();
     
-    console.log('✅ Site pronto para Safari e Chrome!');
+    window.addEventListener('resize', fixSafariVH);
 });
