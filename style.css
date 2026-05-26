@@ -1,0 +1,367 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a;
+    background-image: radial-gradient(circle at 25% 40%, rgba(25, 20, 15, 0.6) 0%, #030303 100%);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Poppins', 'Helvetica Neue', sans-serif;
+    color: #ecedee;
+    line-height: 1.4;
+    scroll-behavior: smooth;
+}
+
+/* Smooth scroll & font smoothing */
+html {
+    scroll-behavior: smooth;
+}
+
+/* container principal */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1.2rem 3rem;
+}
+
+/* ========= HEADER PREMIUM ========= */
+.hero {
+    text-align: center;
+    padding: 2rem 0.5rem 2.5rem;
+    border-bottom: 1px solid rgba(255, 140, 0, 0.25);
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff8c00, #ffb347, #ff8c00, transparent);
+    border-radius: 4px;
+}
+
+.pub-badge {
+    display: inline-block;
+    background: rgba(255, 140, 0, 0.12);
+    backdrop-filter: blur(4px);
+    padding: 0.3rem 1rem;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    color: #ffb347;
+    margin-bottom: 1rem;
+    border: 0.5px solid rgba(255, 140, 0, 0.3);
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFD1A0 80%, #FF9F3D 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.tagline {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #b0a79e;
+    max-width: 500px;
+    margin: 0.75rem auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tagline span {
+    background: #1e1b18;
+    padding: 0.2rem 0.7rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #ffa559;
+}
+
+/* ===== SEÇÃO CERVEJAS ===== */
+.section-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 2rem 0 1.5rem 0;
+    border-left: 4px solid #ff8c00;
+    padding-left: 1rem;
+}
+
+.section-title h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: #f5f2ef;
+}
+
+.section-title .volume-badge {
+    font-size: 0.8rem;
+    background: rgba(255, 140, 0, 0.2);
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+    color: #ffbc6e;
+}
+
+/* Grid responsivo - cards premium */
+.beer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* cartão estilo moderno pub */
+.beer-card {
+    background: rgba(18, 18, 20, 0.85);
+    backdrop-filter: blur(2px);
+    border-radius: 28px;
+    padding: 1.2rem 1.2rem 1.2rem 1.4rem;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border: 1px solid rgba(50, 45, 40, 0.6);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.beer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #ff8c00;
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+    transform-origin: bottom;
+}
+
+.beer-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(255, 140, 0, 0.5);
+    background: rgba(25, 24, 28, 0.95);
+    box-shadow: 0 20px 28px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 140, 0, 0.2);
+}
+
+.beer-card:hover::before {
+    transform: scaleY(1);
+}
+
+/* info esquerda */
+.beer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.beer-name {
+    font-size: 1.35rem;
+    font-weight: 650;
+    letter-spacing: -0.2px;
+    color: #f8f4f0;
+    transition: color 0.2s;
+}
+
+.beer-card:hover .beer-name {
+    color: #ffb347;
+}
+
+.beer-type-hint {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #a5988c;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+/* preço lado direito */
+.beer-price {
+    text-align: right;
+}
+
+.price-value {
+    font-size: 1.7rem;
+    font-weight: 700;
+    background: linear-gradient(145deg, #FFD9B5, #FFAA4A);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.price-currency {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #c9aa7b;
+    margin-right: 2px;
+}
+
+/* elementos decorativos */
+.glass-icon {
+    font-size: 1.3rem;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+}
+
+.beer-card:hover .glass-icon {
+    opacity: 0.9;
+    color: #ff8c00;
+}
+
+/* Footer elegante */
+.footer {
+    margin-top: 4rem;
+    padding: 2rem 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 140, 0, 0.2);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 48px 48px 20px 20px;
+    backdrop-filter: blur(3px);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.pub-logo-footer {
+    font-size: 1.6rem;
+    font-weight: 600;
+    background: linear-gradient(130deg, #ffbc6e, #ff8c2c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.footer-details {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    color: #aa9f92;
+}
+
+.footer-details span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-copy {
+    font-size: 0.7rem;
+    color: #6b6258;
+    margin-top: 0.5rem;
+}
+
+/* animação sutil de entrada */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.beer-card {
+    animation: fadeSlideUp 0.4s ease backwards;
+}
+
+/* delay para cada card (gerado dinamicamente por nth-child) */
+.beer-card:nth-child(1) { animation-delay: 0.02s; }
+.beer-card:nth-child(2) { animation-delay: 0.06s; }
+.beer-card:nth-child(3) { animation-delay: 0.1s; }
+.beer-card:nth-child(4) { animation-delay: 0.14s; }
+.beer-card:nth-child(5) { animation-delay: 0.18s; }
+.beer-card:nth-child(6) { animation-delay: 0.22s; }
+.beer-card:nth-child(7) { animation-delay: 0.26s; }
+.beer-card:nth-child(8) { animation-delay: 0.30s; }
+.beer-card:nth-child(9) { animation-delay: 0.34s; }
+.beer-card:nth-child(10) { animation-delay: 0.38s; }
+
+/* responsividade refinada */
+@media (max-width: 640px) {
+    .container {
+        padding: 1rem 1rem 2rem;
+    }
+    h1 {
+        font-size: 2.5rem;
+    }
+    .section-title h2 {
+        font-size: 1.5rem;
+    }
+    .beer-grid {
+        gap: 1rem;
+        grid-template-columns: 1fr;
+    }
+    .beer-card {
+        padding: 1rem 1.2rem;
+    }
+    .price-value {
+        font-size: 1.5rem;
+    }
+    .beer-name {
+        font-size: 1.2rem;
+    }
+    .hero {
+        padding: 1.5rem 0.2rem 2rem;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+    .beer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* scrollbar custom */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #141210;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff8c2c;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ffaa55;
+}
+
+/* destaque extra */
+.price-value small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    background: none;
+    -webkit-background-clip: unset;
+    color: #bd9e78;
+}
