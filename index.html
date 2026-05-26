@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Avenida Pub | Cardápio Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <!-- cabeçalho bonito e moderno -->
+    <div class="hero">
+        <div class="pub-badge">EST. 2025 • GASTROPUB</div>
+        <h1>AVENIDA PUB</h1>
+        <div class="tagline">
+            <span>🍻 Chopp & Artesanais</span>
+            <span>🎸 Música ao vivo</span>
+            <span>🌙 Happy Hour</span>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: #cfb693;">✨ lata 600ml · gelada sempre ✨</div>
+    </div>
+
+    <!-- seção cervejas 600ml -->
+    <div class="section-title">
+        <h2>🍺 Cervejas 600ml</h2>
+        <div class="volume-badge">Long Neck & Latão</div>
+    </div>
+
+    <div class="beer-grid" id="beerList">
+        <!-- Os itens serão injetados via JS -->
+    </div>
+
+    <!-- rodapé elegante -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="pub-logo-footer">AVENIDA PUB</div>
+            <div class="footer-details">
+                <span>📍 Rua das Bandeiras, 777 - Centro</span>
+                <span>⏰ Seg-Sáb: 17h às 01h | Dom: 16h-23h</span>
+                <span>📞 (11) 97777-1234</span>
+            </div>
+            <div class="footer-details" style="gap: 1rem; font-size:0.7rem;">
+                <span>🍔 Petiscos & Porções</span>
+                <span>🎯 Open de Sinuca</span>
+                <span>🍹 Drinks autorais</span>
+            </div>
+            <div class="footer-copy">
+                © 2025 Avenida Pub · Tradição e inovação em cada gole
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Fallback para usuários sem JavaScript -->
+<noscript>
+    <div class="beer-grid" style="display:grid; gap:1.5rem;">
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Heineken</div><div class="beer-type-hint">Lager Premium</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 14,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Corona</div><div class="beer-type-hint">Pilsener leve</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 14,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Stella Artois</div><div class="beer-type-hint">Puro Malte</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 13,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Spaten</div><div class="beer-type-hint">München Lager</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 12,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Original</div><div class="beer-type-hint">Leve & Refrescante</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 11,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Budweiser</div><div class="beer-type-hint">Lager Americana</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 10,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Boa</div><div class="beer-type-hint">Puro Sabor</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 10,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Brahma</div><div class="beer-type-hint">Clássica</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 10,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Skol</div><div class="beer-type-hint">Leveza única</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 10,00</div><div class="glass-icon">🍺</div></div></div>
+        <div class="beer-card"><div class="beer-info"><div class="beer-name">Amstel</div><div class="beer-type-hint">Sabor encorpado</div></div><div class="beer-price"><div class="price-value"><span class="price-currency">R$</span> 10,00</div><div class="glass-icon">🍺</div></div></div>
+    </div>
+</noscript>
+
+<script src="script.js"></script>
+</body>
+</html>
