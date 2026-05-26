@@ -1,6 +1,7 @@
 /**
  * AVENIDA PUB BOCAINA
  * Script principal - Cardápio digital premium
+ * Mobile First
  */
 
 // Dados das cervejas (600ml)
@@ -17,7 +18,7 @@ const beers = [
     { name: "Amstel", price: 10, style: "Sabor Encorpado" }
 ];
 
-// Função para formatar preço em reais
+// Função para formatar preço
 const formatPrice = (price) => {
     return price.toLocaleString('pt-BR', { 
         minimumFractionDigits: 2, 
@@ -25,7 +26,7 @@ const formatPrice = (price) => {
     });
 };
 
-// Função para criar os cards das cervejas
+// Criar cards das cervejas
 const createBeerCards = () => {
     const beerContainer = document.getElementById('beerList');
     
@@ -34,17 +35,12 @@ const createBeerCards = () => {
         return;
     }
     
-    // Limpa o container
     beerContainer.innerHTML = '';
     
-    // Para cada cerveja, cria um card
-    beers.forEach((beer, index) => {
+    beers.forEach((beer) => {
         const card = document.createElement('div');
         card.className = 'beer-card';
-        card.setAttribute('data-beer', beer.name);
-        card.setAttribute('data-price', beer.price);
         
-        // Estrutura do card
         card.innerHTML = `
             <div class="beer-info">
                 <div class="beer-name">${beer.name}</div>
@@ -60,34 +56,21 @@ const createBeerCards = () => {
             </div>
         `;
         
-        // Adiciona efeito de clique (feedback visual)
+        // Feedback ao tocar/clicar
         card.addEventListener('click', () => {
-            // Pequena animação de feedback
             card.style.transform = 'scale(0.98)';
             setTimeout(() => {
                 card.style.transform = '';
             }, 150);
-            
-            // Console log (pode ser substituído por toast no futuro)
-            console.log(`🍺 ${beer.name} selecionada - R$ ${formatPrice(beer.price)}`);
         });
         
         beerContainer.appendChild(card);
     });
     
-    console.log(`✅ ${beers.length} cervejas carregadas com sucesso!`);
+    console.log(`✅ ${beers.length} cervejas carregadas`);
 };
 
-// Função para corrigir o mapa (coordenadas aproximadas de Bocaina - SP)
-const fixMapCoordinates = () => {
-    const mapFrame = document.querySelector('.google-map');
-    if (mapFrame && mapFrame.src.includes('pb=!1m18')) {
-        // O mapa já está configurado corretamente no HTML
-        console.log('🗺️ Mapa carregado com sucesso');
-    }
-};
-
-// Função para animar elementos ao scroll
+// Animação ao scroll
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('.beer-card, .feature-card, .info-card, .map-wrapper');
     
@@ -99,23 +82,23 @@ const animateOnScroll = () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     
     elements.forEach(element => {
         element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'all 0.6s ease';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'all 0.5s ease';
         observer.observe(element);
     });
 };
 
-// Função para controlar o botão "Voltar ao topo"
+// Botão voltar ao topo
 const backToTopButton = () => {
     const button = document.getElementById('backToTop');
     if (!button) return;
     
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
+        if (window.scrollY > 300) {
             button.classList.add('show');
         } else {
             button.classList.remove('show');
@@ -123,14 +106,11 @@ const backToTopButton = () => {
     });
     
     button.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 };
 
-// Função para suavizar a navegação dos links internos
+// Navegação suave
 const smoothNavigation = () => {
     const links = document.querySelectorAll('a[href^="#"]');
     
@@ -146,41 +126,12 @@ const smoothNavigation = () => {
                     behavior: 'smooth',
                     block: 'start'
                 });
-                
-                // Atualiza URL sem recarregar
-                history.pushState(null, null, targetId);
             }
         });
     });
 };
 
-// Função para adicionar tooltips nos ícones das redes sociais
-const addTooltips = () => {
-    const socialLinks = document.querySelectorAll('.social-link, .footer-social-link');
-    
-    socialLinks.forEach(link => {
-        link.setAttribute('title', 'Abrir Instagram');
-    });
-};
-
-// Função para exibir um console art (apenas para estilo)
-const showConsoleArt = () => {
-    console.log(`
-    ╔═══════════════════════════════════════╗
-    ║     🍺 AVENIDA PUB BOCAINA 🍺         ║
-    ║                                       ║
-    ║   Cardápio digital carregado com      ║
-    ║   sucesso!                            ║
-    ║                                       ║
-    ║   ✨ Design Premium | Dark Mode       ║
-    ║   📱 Totalmente Responsivo            ║
-    ║   🎨 Neon Laranja & Dourado           ║
-    ║   ⚽ Transmissão de Jogos             ║
-    ╚═══════════════════════════════════════╝
-    `);
-};
-
-// Função para adicionar data atual no footer
+// Atualizar ano no footer
 const addCurrentYear = () => {
     const yearElement = document.querySelector('.footer-bottom p:first-child');
     if (yearElement) {
@@ -189,55 +140,13 @@ const addCurrentYear = () => {
     }
 };
 
-// Inicialização quando o DOM estiver completamente carregado
+// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Inicializando Avenida Pub Bocaina...');
-    
-    // Cria os cards do cardápio
     createBeerCards();
-    
-    // Corrige o mapa
-    fixMapCoordinates();
-    
-    // Anima elementos ao scroll
     animateOnScroll();
-    
-    // Configura botão voltar ao topo
     backToTopButton();
-    
-    // Configura navegação suave
     smoothNavigation();
-    
-    // Adiciona tooltips
-    addTooltips();
-    
-    // Atualiza ano no footer
     addCurrentYear();
     
-    // Mostra arte no console
-    showConsoleArt();
-});
-
-// Adiciona efeito de parallax suave no hero (opcional)
-window.addEventListener('mousemove', (e) => {
-    const hero = document.querySelector('.hero');
-    if (!hero || window.innerWidth < 768) return;
-    
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    const moveX = (mouseX - 0.5) * 20;
-    const moveY = (mouseY - 0.5) * 20;
-    
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.transform = `translate(${moveX * 0.5}px, ${moveY * 0.5}px)`;
-    }
-});
-
-// Previne o comportamento padrão de arrastar elementos
-document.querySelectorAll('.beer-card, .feature-card').forEach(el => {
-    el.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-    });
+    console.log('🍺 Avenida Pub Bocaina - Pronto para servir!');
 });
