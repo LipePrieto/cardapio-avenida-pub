@@ -6,12 +6,24 @@
     <meta name="description" content="Avenida Pub Bocaina - O melhor pub de Bocaina, SP. Cervejas geladas, ambiente premium e sinuca por apenas R$2 a ficha.">
     <meta name="keywords" content="pub, cerveja, bocaina, avenida pub, bar, happy hour, sinuca">
     <meta name="author" content="Avenida Pub Bocaina">
+    <meta name="theme-color" content="#ff8c00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Avenida Pub">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <title>Avenida Pub Bocaina | Cardápio Digital</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body data-theme="dark">
+    <!-- Botão de Toggle Dark/Light Mode -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Alternar tema">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
+
     <!-- Botão Voltar ao Topo -->
     <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
         <i class="fas fa-arrow-up"></i>
@@ -66,8 +78,40 @@
                 <div class="section-divider"></div>
             </div>
 
+            <!-- Barra de Busca/Filtro -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar cerveja... Heineken, Brahma, Skol..." aria-label="Buscar cervejas">
+                    <button id="clearSearch" class="clear-search" aria-label="Limpar busca">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="search-info">
+                    <span id="searchCount">10 cervejas disponíveis</span>
+                </div>
+            </div>
+
             <div class="beer-grid" id="beerList">
                 <!-- Cards serão inseridos via JavaScript -->
+            </div>
+
+            <!-- Card da Sinuca -->
+            <div class="sinuca-card">
+                <div class="sinuca-content">
+                    <div class="sinuca-icon">
+                        <i class="fas fa-table-tennis"></i>
+                        🎱
+                    </div>
+                    <div class="sinuca-info">
+                        <h3>Mesa de Sinuca</h3>
+                        <p>Diversão garantida • Mesas profissionais</p>
+                    </div>
+                    <div class="sinuca-price">
+                        <span class="price-label">Por ficha</span>
+                        <span class="price-value">R$ 2,00</span>
+                    </div>
+                </div>
             </div>
 
             <div class="menu-note">
@@ -120,14 +164,6 @@
                                 <p>Segunda a Sábado: 17h às 01h<br>Domingo: 16h às 23h</p>
                             </div>
                         </div>
-
-                        <div class="info-item">
-                            <i class="fas fa-table-tennis"></i>
-                            <div>
-                                <h4>Mesa de Sinuca</h4>
-                                <p><strong>R$ 2,00 por ficha</strong> • Diversão garantida</p>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="social-links">
@@ -160,6 +196,46 @@
                         <p>Qualidade total</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Pagamento -->
+    <section class="payment-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Facilidade para você</div>
+                <h2 class="section-title">
+                    <i class="fas fa-credit-card"></i>
+                    Formas de Pagamento
+                </h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="payment-grid">
+                <div class="payment-item">
+                    <i class="fas fa-money-bill"></i>
+                    <span>Dinheiro</span>
+                </div>
+                <div class="payment-item">
+                    <i class="fab fa-pix"></i>
+                    <span>PIX</span>
+                </div>
+                <div class="payment-item">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Crédito</span>
+                </div>
+                <div class="payment-item">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Débito</span>
+                </div>
+                <div class="payment-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Google/Apple Pay</span>
+                </div>
+            </div>
+            <div class="payment-note">
+                <i class="fas fa-shield-alt"></i>
+                <span>Pagamento seguro • Aceitamos todas as bandeiras</span>
             </div>
         </div>
     </section>
