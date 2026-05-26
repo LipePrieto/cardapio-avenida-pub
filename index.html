@@ -2,13 +2,10 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- Meta tags para todos os navegadores -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="description" content="Avenida Pub Bocaina - O melhor pub de Bocaina, SP. Cervejas geladas, ambiente premium e sinuca por apenas R$2 a ficha.">
     <meta name="keywords" content="pub, cerveja, bocaina, avenida pub, bar, happy hour, sinuca">
     <meta name="author" content="Avenida Pub Bocaina">
-    
-    <!-- PWA -->
     <meta name="theme-color" content="#ff8c00">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,7 +13,6 @@
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ff8c00'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='white'%3E🍺%3C/text%3E%3C/svg%3E">
     
-    <!-- Preconnect para fontes (melhora performance) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
@@ -100,12 +96,21 @@
                 </div>
             </div>
 
-            <div class="beer-grid" id="beerList">
-                <!-- Cards serão inseridos via JavaScript -->
+            <!-- Skeleton Screen (Tela de carregamento) -->
+            <div id="skeletonLoader" class="skeleton-loader">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
             </div>
 
+            <!-- Grid de cervejas (inicialmente escondido) -->
+            <div class="beer-grid" id="beerList" style="display: none;"></div>
+
             <!-- Card da Sinuca -->
-            <div class="sinuca-card">
+            <div class="sinuca-card" id="sinucaCard" style="display: none;">
                 <div class="sinuca-content">
                     <div class="sinuca-icon">
                         <i class="fas fa-table-tennis"></i>
@@ -122,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="menu-note">
+            <div class="menu-note" id="menuNote" style="display: none;">
                 <i class="fas fa-tint"></i>
                 <span>Todas as cervejas são servidas na temperatura ideal (2°C a 4°C)</span>
             </div>
