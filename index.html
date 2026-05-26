@@ -3,479 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Avenida Pub | Cardápio Digital</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #0a0a0a;
-            background-image: radial-gradient(circle at 25% 40%, rgba(25, 20, 15, 0.6) 0%, #030303 100%);
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Poppins', 'Helvetica Neue', sans-serif;
-            color: #ecedee;
-            line-height: 1.4;
-            scroll-behavior: smooth;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 1.5rem 1.2rem 3rem;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 2rem 0.5rem 2.5rem;
-            border-bottom: 1px solid rgba(255, 140, 0, 0.25);
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 10%;
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff8c00, #ffb347, #ff8c00, transparent);
-            border-radius: 4px;
-        }
-
-        .pub-badge {
-            display: inline-block;
-            background: rgba(255, 140, 0, 0.12);
-            backdrop-filter: blur(4px);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
-            font-weight: 500;
-            color: #ffb347;
-            margin-bottom: 1rem;
-            border: 0.5px solid rgba(255, 140, 0, 0.3);
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-size: 3.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFD1A0 80%, #FF9F3D 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .tagline {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #b0a79e;
-            max-width: 500px;
-            margin: 0.75rem auto 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .tagline span {
-            background: #1e1b18;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #ffa559;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin: 2rem 0 1.5rem 0;
-            border-left: 4px solid #ff8c00;
-            padding-left: 1rem;
-        }
-
-        .section-title h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-            color: #f5f2ef;
-        }
-
-        .section-title .volume-badge {
-            font-size: 0.8rem;
-            background: rgba(255, 140, 0, 0.2);
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-weight: 500;
-            color: #ffbc6e;
-        }
-
-        .beer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .beer-card {
-            background: rgba(18, 18, 20, 0.85);
-            backdrop-filter: blur(2px);
-            border-radius: 28px;
-            padding: 1.2rem 1.2rem 1.2rem 1.4rem;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(50, 45, 40, 0.6);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: default;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .beer-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #ff8c00;
-            transform: scaleY(0);
-            transition: transform 0.25s ease;
-            transform-origin: bottom;
-        }
-
-        .beer-card:hover {
-            transform: translateY(-6px) scale(1.01);
-            border-color: rgba(255, 140, 0, 0.5);
-            background: rgba(25, 24, 28, 0.95);
-            box-shadow: 0 20px 28px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 140, 0, 0.2);
-        }
-
-        .beer-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        .beer-info {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .beer-name {
-            font-size: 1.35rem;
-            font-weight: 650;
-            letter-spacing: -0.2px;
-            color: #f8f4f0;
-            transition: color 0.2s;
-        }
-
-        .beer-card:hover .beer-name {
-            color: #ffb347;
-        }
-
-        .beer-type-hint {
-            font-size: 0.7rem;
-            font-weight: 400;
-            color: #a5988c;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        .beer-price {
-            text-align: right;
-        }
-
-        .price-value {
-            font-size: 1.7rem;
-            font-weight: 700;
-            background: linear-gradient(145deg, #FFD9B5, #FFAA4A);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .price-currency {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #c9aa7b;
-            margin-right: 2px;
-        }
-
-        .glass-icon {
-            font-size: 1.3rem;
-            opacity: 0.4;
-            transition: opacity 0.2s;
-        }
-
-        .beer-card:hover .glass-icon {
-            opacity: 0.9;
-            color: #ff8c00;
-        }
-
-        .footer {
-            margin-top: 4rem;
-            padding: 2rem 1rem 1.5rem;
-            border-top: 1px solid rgba(255, 140, 0, 0.2);
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 48px 48px 20px 20px;
-            backdrop-filter: blur(3px);
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .pub-logo-footer {
-            font-size: 1.6rem;
-            font-weight: 600;
-            background: linear-gradient(130deg, #ffbc6e, #ff8c2c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .footer-details {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            font-size: 0.75rem;
-            color: #aa9f92;
-        }
-
-        .footer-details span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .footer-copy {
-            font-size: 0.7rem;
-            color: #6b6258;
-            margin-top: 0.5rem;
-        }
-
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .beer-card {
-            animation: fadeSlideUp 0.4s ease backwards;
-        }
-
-        .beer-card:nth-child(1) { animation-delay: 0.02s; }
-        .beer-card:nth-child(2) { animation-delay: 0.06s; }
-        .beer-card:nth-child(3) { animation-delay: 0.1s; }
-        .beer-card:nth-child(4) { animation-delay: 0.14s; }
-        .beer-card:nth-child(5) { animation-delay: 0.18s; }
-        .beer-card:nth-child(6) { animation-delay: 0.22s; }
-        .beer-card:nth-child(7) { animation-delay: 0.26s; }
-        .beer-card:nth-child(8) { animation-delay: 0.30s; }
-        .beer-card:nth-child(9) { animation-delay: 0.34s; }
-        .beer-card:nth-child(10) { animation-delay: 0.38s; }
-
-        @media (max-width: 640px) {
-            .container {
-                padding: 1rem 1rem 2rem;
-            }
-            h1 {
-                font-size: 2.5rem;
-            }
-            .section-title h2 {
-                font-size: 1.5rem;
-            }
-            .beer-grid {
-                gap: 1rem;
-                grid-template-columns: 1fr;
-            }
-            .beer-card {
-                padding: 1rem 1.2rem;
-            }
-            .price-value {
-                font-size: 1.5rem;
-            }
-            .beer-name {
-                font-size: 1.2rem;
-            }
-            .hero {
-                padding: 1.5rem 0.2rem 2rem;
-            }
-        }
-
-        @media (min-width: 641px) and (max-width: 900px) {
-            .beer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #141210;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff8c2c;
-            border-radius: 8px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ffaa55;
-        }
-    </style>
+    <meta name="description" content="Avenida Pub Bocaina - O melhor pub de Bocaina, SP. Cervejas geladas, ambiente premium e música ao vivo.">
+    <meta name="keywords" content="pub, cerveja, bocaina, avenida pub, bar, happy hour">
+    <meta name="author" content="Avenida Pub Bocaina">
+    <title>Avenida Pub Bocaina | Pub Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-<div class="container">
-    <div class="hero">
-        <div class="pub-badge">EST. 2025 • GASTROPUB</div>
-        <h1>AVENIDA PUB</h1>
-        <div class="tagline">
-            <span>🍻 Cervejas 600ml</span>
+    <!-- Botão Voltar ao Topo -->
+    <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Header / Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">EST. 2025 • GASTROPUB PREMIUM</div>
+            <h1 class="hero-title">
+                <span class="title-line">AVENIDA PUB</span>
+                <span class="title-location">BOCAINA</span>
+            </h1>
+            <div class="hero-divider">
+                <span></span>
+                <i class="fas fa-beer"></i>
+                <span></span>
+            </div>
+            <p class="hero-subtitle">Onde a noite ganha sabor e a cerveja é gelada como deve ser</p>
+            <div class="hero-tags">
+                <span><i class="fas fa-music"></i> Música ao vivo</span>
+                <span><i class="fas fa-futbol"></i> Transmissão de jogos</span>
+                <span><i class="fas fa-dice"></i> Open de Sinuca</span>
+            </div>
+            <div class="hero-cta">
+                <a href="#cardapio" class="btn-primary">
+                    <i class="fas fa-beer"></i> Ver Cardápio
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="#mapa" class="btn-secondary">
+                    <i class="fas fa-map-marker-alt"></i> Como Chegar
+                </a>
+            </div>
         </div>
-        <div style="margin-top: 1rem; font-size: 0.85rem; color: #cfb693;">✨ gelada sempre ✨</div>
-    </div>
+        <div class="hero-scroll-indicator">
+            <span>Role para explorar</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
 
-    <div class="section-title">
-        <h2>🍺 Cervejas 600ml</h2>
-        <div class="volume-badge">Long Neck & Latão</div>
-    </div>
+    <!-- Seção Cardápio -->
+    <section class="menu-section" id="cardapio">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Gelada e refrescante</div>
+                <h2 class="section-title">
+                    <i class="fas fa-beer"></i>
+                    Cervejas 600ml
+                    <i class="fas fa-beer"></i>
+                </h2>
+                <div class="section-divider"></div>
+            </div>
 
-    <div class="beer-grid" id="beerList"></div>
+            <div class="beer-grid" id="beerList">
+                <!-- Cards serão inseridos via JavaScript -->
+            </div>
 
+            <div class="menu-note">
+                <i class="fas fa-tint"></i>
+                <span>Todas as cervejas são servidas na temperatura ideal (2°C a 4°C)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre e Informações -->
+    <section class="about-section" id="sobre">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-info">
+                    <div class="section-header text-left">
+                        <div class="section-subtitle">Sobre nós</div>
+                        <h2 class="section-title">Avenida Pub<br>Bocaina</h2>
+                        <div class="section-divider left"></div>
+                    </div>
+                    <p class="about-description">
+                        O <strong>Avenida Pub Bocaina</strong> nasceu para trazer uma experiência única para a região. 
+                        Com ambiente sofisticado, iluminação aconchegante e um atendimento de primeira classe, 
+                        somos o point preferido de quem busca qualidade, diversão e as cervejas mais geladas da cidade.
+                    </p>
+                    
+                    <div class="info-card">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Endereço</h4>
+                                <p>R. Pref. Guilherme Giraide Ferreira Canpam, 626<br>Bocaina - SP, 17245-128</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-instagram"></i>
+                            <div>
+                                <h4>Instagram</h4>
+                                <a href="https://www.instagram.com/avenidapuboficial/" target="_blank" rel="noopener noreferrer">
+                                    @avenidapuboficial
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Horário de Funcionamento</h4>
+                                <p>Segunda a Sábado: 17h às 01h<br>Domingo: 16h às 23h</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/avenidapuboficial/" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Siga-nos no Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="about-features">
+                    <div class="feature-card">
+                        <i class="fas fa-beer"></i>
+                        <h3>+15 Tipos</h3>
+                        <p>de cervejas especiais</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-music"></i>
+                        <h3>Música Ao Vivo</h3>
+                        <p>Todas as sextas e sábados</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-tv"></i>
+                        <h3>Telões 4K</h3>
+                        <p>Para não perder nenhum jogo</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-wifi"></i>
+                        <h3>Wi-Fi Grátis</h3>
+                        <p>Para você ficar conectado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Mapa -->
+    <section class="map-section" id="mapa">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">Encontre-nos</div>
+                <h2 class="section-title">
+                    <i class="fas fa-map-marked-alt"></i>
+                    Como Chegar
+                </h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="map-wrapper">
+                <iframe 
+                    class="google-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.123456789012!2d-48.123456!3d-21.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDA3JzI0LjQiUyA0OMKwMDcnMjQuNCJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Mapa Avenida Pub Bocaina">
+                </iframe>
+            </div>
+            
+            <div class="map-info">
+                <div class="map-address-card">
+                    <i class="fas fa-location-dot"></i>
+                    <div>
+                        <strong>Endereço completo:</strong>
+                        <p>R. Pref. Guilherme Giraide Ferreira Canpam, 626 - Bocaina - SP, 17245-128</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=R.+Pref.+Guilherme+Giraide+Ferreira+Canpam,+626,+Bocaina+-+SP" 
+                       target="_blank" class="map-link-btn">
+                        Abrir no Google Maps <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="pub-logo-footer">AVENIDA PUB</div>
-            <div class="footer-details">
-                <span>📍 R. Pref. Guilherme Giraide Ferreira Canpam, 626</span>
-                <span>🏠 Bocaina - SP, 17245-128</span>
-            </div>
-            <div class="footer-details">
-                <span>⏰ Seg-Sáb: 17h às 01h | Dom: 16h-23h</span>
-                <span>📞 (14) 99777-1234</span>
-            </div>
-            <div class="footer-details" style="gap: 1rem; font-size:0.7rem;">
-                <span>Petiscos</span>
-            </div>
-            <div class="footer-copy">
-                © 2025 Avenida Pub · Tradição e inovação em cada gole.
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>AVENIDA PUB</h3>
+                    <p>BOCAINA</p>
+                    <span class="footer-tagline">Sua noite, nosso compromisso</span>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4><i class="fas fa-map-marker-alt"></i> Endereço</h4>
+                        <p>R. Pref. Guilherme Giraide<br>Ferreira Canpam, 626<br>Bocaina - SP, 17245-128</p>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4><i class="fas fa-share-alt"></i> Redes Sociais</h4>
+                        <a href="https://www.instagram.com/avenidapuboficial/" target="_blank" class="footer-social-link">
+                            <i class="fab fa-instagram"></i> @avenidapuboficial
+                        </a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4><i class="fas fa-clock"></i> Horário</h4>
+                        <p>Seg-Sáb: 17h - 01h<br>Dom: 16h - 23h</p>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Avenida Pub Bocaina. Todos os direitos reservados.</p>
+                    <p class="footer-developer">Desenvolvido com <i class="fas fa-heart"></i> para você</p>
+                </div>
             </div>
         </div>
     </footer>
-</div>
 
-<script>
-    const beers = [
-        { name: "Heineken", price: 14 },
-        { name: "Corona", price: 14 },
-        { name: "Stella Artois", price: 13 },
-        { name: "Spaten", price: 12 },
-        { name: "Original", price: 11 },
-        { name: "Budweiser", price: 10 },
-        { name: "Boa", price: 10 },
-        { name: "Brahma", price: 10 },
-        { name: "Skol", price: 10 },
-        { name: "Amstel", price: 10 }
-    ];
-
-    const getBeerStyleHint = (name) => {
-        const hints = {
-            "Heineken": "Lager Premium",
-            "Corona": "Pilsener leve",
-            "Stella Artois": "Puro Malte",
-            "Spaten": "München Lager",
-            "Original": "Leve & Refrescante",
-            "Budweiser": "Lager Americana",
-            "Boa": "Puro Sabor",
-            "Brahma": "Clássica",
-            "Skol": "Leveza única",
-            "Amstel": "Sabor encorpado"
-        };
-        return hints[name] || "Gelada 600ml";
-    };
-
-    const formatPrice = (price) => {
-        return price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    };
-
-    const createBeerCards = () => {
-        const beerContainer = document.getElementById('beerList');
-        if (!beerContainer) return;
-        
-        beerContainer.innerHTML = '';
-        
-        beers.forEach((beer) => {
-            const card = document.createElement('div');
-            card.className = 'beer-card';
-            
-            const leftDiv = document.createElement('div');
-            leftDiv.className = 'beer-info';
-            
-            const beerNameSpan = document.createElement('div');
-            beerNameSpan.className = 'beer-name';
-            beerNameSpan.textContent = beer.name;
-            
-            const hintSpan = document.createElement('div');
-            hintSpan.className = 'beer-type-hint';
-            hintSpan.textContent = getBeerStyleHint(beer.name);
-            
-            leftDiv.appendChild(beerNameSpan);
-            leftDiv.appendChild(hintSpan);
-            
-            const rightDiv = document.createElement('div');
-            rightDiv.className = 'beer-price';
-            
-            const priceSpan = document.createElement('div');
-            priceSpan.className = 'price-value';
-            priceSpan.innerHTML = `<span class="price-currency">R$</span> ${formatPrice(beer.price).replace('.', ',')}`;
-            
-            const glassIcon = document.createElement('div');
-            glassIcon.className = 'glass-icon';
-            glassIcon.style.fontSize = '1.3rem';
-            glassIcon.style.marginTop = '6px';
-            glassIcon.style.textAlign = 'right';
-            glassIcon.textContent = '🍺';
-            
-            rightDiv.appendChild(priceSpan);
-            rightDiv.appendChild(glassIcon);
-            
-            card.appendChild(leftDiv);
-            card.appendChild(rightDiv);
-            
-            beerContainer.appendChild(card);
-        });
-    };
-
-    document.addEventListener('DOMContentLoaded', () => {
-        createBeerCards();
-        console.log('🍻 Avenida Pub - Bocaina/SP | Cardápio carregado!');
-    });
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
