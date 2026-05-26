@@ -1,20 +1,19 @@
 /* ============================================
    AVENIDA PUB BOCAINA
-   Otimizado para Safari (iOS) e Chrome (Android)
+   Com Skeleton Screen e Mais Pedidas
    ============================================ */
 
-/* Reset e base - compatível com todos navegadores */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent; /* Remove highlight no Safari/Chrome */
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 20px;
-    -webkit-text-size-adjust: 100%; /* Previne zoom automático no Safari */
+    -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
 }
 
@@ -23,7 +22,7 @@ body {
     line-height: 1.5;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
-    -webkit-font-smoothing: antialiased; /* Melhora fontes no Safari */
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
@@ -79,7 +78,81 @@ body[data-theme="light"] .footer {
     border-top-color: rgba(255, 140, 0, 0.3);
 }
 
-/* Theme Toggle Button - Otimizado para toque */
+/* ========== SKELETON SCREEN ========== */
+.skeleton-loader {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.skeleton-card {
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 20px;
+    height: 85px;
+    width: 100%;
+}
+
+body[data-theme="light"] .skeleton-card {
+    background: linear-gradient(90deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 75%);
+    background-size: 200% 100%;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .skeleton-loader {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .skeleton-loader {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ========== SELO MAIS PEDIDA ========== */
+.beer-card {
+    position: relative;
+}
+
+.top-badge {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: linear-gradient(135deg, #ff6b00, #ff8c00);
+    color: #000;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.top-badge::before {
+    content: "🔥";
+    margin-right: 0.2rem;
+    font-size: 0.7rem;
+}
+
+/* ========== THEME TOGGLE ========== */
 .theme-toggle {
     position: fixed;
     top: 1rem;
@@ -89,7 +162,7 @@ body[data-theme="light"] .footer {
     border-radius: 50%;
     background: rgba(255, 140, 0, 0.2);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 140, 0, 0.3);
     cursor: pointer;
     z-index: 1001;
@@ -970,7 +1043,7 @@ body[data-theme="light"] .footer-logo h3 {
     }
 }
 
-/* Responsividade para tablets e desktop */
+/* Responsividade */
 @media (min-width: 768px) {
     .container {
         max-width: 720px;
@@ -1052,24 +1125,22 @@ body[data-theme="light"] .footer-logo h3 {
     }
 }
 
-/* Safari específico - corrige backdrop-filter */
+/* Safari fixes */
 @supports (backdrop-filter: blur(10px)) {
     .beer-card, .info-card, .feature-card, .search-box, .payment-item {
         backdrop-filter: blur(10px);
     }
 }
 
-/* Remove o highlight azul no Safari ao tocar */
 input:focus, button:focus, a:focus {
     outline: none;
 }
 
-/* Melhora a experiência de toque no iOS */
 button, a, .beer-card, .feature-card {
     cursor: pointer;
 }
 
-/* Scrollbar custom */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 4px;
 }
