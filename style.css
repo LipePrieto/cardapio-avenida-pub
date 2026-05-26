@@ -1,9 +1,9 @@
 /* ============================================
    AVENIDA PUB BOCAINA - MOBILE FIRST
-   Design Responsivo | Dark Mode | Neon Laranja
+   Design Responsivo | Dark/Light Mode | Neon Laranja
    ============================================ */
 
-/* Reset e base - Mobile First */
+/* Reset e base */
 * {
     margin: 0;
     padding: 0;
@@ -18,13 +18,108 @@ html {
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #050505;
-    color: #ecedee;
     line-height: 1.5;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Container - adaptado para mobile */
+/* Temas */
+body[data-theme="dark"] {
+    background-color: #050505;
+    color: #ecedee;
+}
+
+body[data-theme="light"] {
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+}
+
+body[data-theme="light"] .hero {
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+}
+
+body[data-theme="light"] .hero-overlay {
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.7) 100%);
+}
+
+body[data-theme="light"] .hero-subtitle,
+body[data-theme="light"] .hero-tags span {
+    color: #333;
+}
+
+body[data-theme="light"] .beer-card,
+body[data-theme="light"] .info-card,
+body[data-theme="light"] .feature-card,
+body[data-theme="light"] .sinuca-card,
+body[data-theme="light"] .payment-item,
+body[data-theme="light"] .map-address-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 140, 0, 0.3);
+}
+
+body[data-theme="light"] .beer-name,
+body[data-theme="light"] .feature-card h3 {
+    color: #1a1a1a;
+}
+
+body[data-theme="light"] .about-description,
+body[data-theme="light"] .info-item p {
+    color: #555;
+}
+
+body[data-theme="light"] .footer {
+    background: #e0e0e0;
+    border-top-color: rgba(255, 140, 0, 0.3);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 140, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+body[data-theme="dark"] .theme-toggle .fa-sun {
+    display: block;
+    color: #ffb347;
+}
+
+body[data-theme="dark"] .theme-toggle .fa-moon {
+    display: none;
+}
+
+body[data-theme="light"] .theme-toggle .fa-sun {
+    display: none;
+}
+
+body[data-theme="light"] .theme-toggle .fa-moon {
+    display: block;
+    color: #1a1a1a;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 140, 0, 0.4);
+}
+
+/* Container */
 .container {
     width: 100%;
     max-width: 100%;
@@ -32,7 +127,7 @@ body {
     margin: 0 auto;
 }
 
-/* ========== HERO SECTION ========== */
+/* Hero Section */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -40,20 +135,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a00 100%);
-    position: relative;
     overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="%23ff8c0010" stroke-width="2"/><circle cx="100" cy="100" r="60" fill="none" stroke="%23ff8c0010" stroke-width="1"/></svg>') repeat;
-    opacity: 0.3;
 }
 
 .hero-overlay {
@@ -62,7 +144,6 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%);
 }
 
 .hero-content {
@@ -103,6 +184,12 @@ body {
     display: block;
 }
 
+body[data-theme="light"] .title-line {
+    background: linear-gradient(135deg, #1a1a1a 0%, #ff8c00 50%, #ff6b00 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
 .title-location {
     background: linear-gradient(135deg, #FF9F3D 0%, #FF6B00 100%);
     background-clip: text;
@@ -133,7 +220,6 @@ body {
 
 .hero-subtitle {
     font-size: 0.95rem;
-    color: #c9c9c9;
     margin-bottom: 1.5rem;
     padding: 0 0.5rem;
 }
@@ -201,31 +287,85 @@ body {
     border: 1px solid rgba(255, 140, 0, 0.5);
 }
 
+body[data-theme="light"] .btn-secondary {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
 .btn-secondary:hover {
     background: rgba(255, 140, 0, 0.2);
     transform: translateY(-3px);
 }
 
-.hero-scroll-indicator {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+/* Search Bar */
+.search-container {
+    margin-bottom: 1.5rem;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(20, 20, 25, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    transition: all 0.3s;
+}
+
+body[data-theme="light"] .search-box {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.search-box:focus-within {
+    border-color: #ff8c00;
+    box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+}
+
+.search-box i {
+    color: #ff8c00;
+    font-size: 1rem;
+}
+
+.search-box input {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    color: inherit;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: #888;
+}
+
+.clear-search {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.clear-search:hover {
+    color: #ff8c00;
+    background: rgba(255, 140, 0, 0.1);
+}
+
+.search-info {
     text-align: center;
-    color: #ffb347;
+    margin-top: 0.5rem;
     font-size: 0.7rem;
-    animation: bounce 2s infinite;
+    color: #888;
 }
 
-.hero-scroll-indicator i {
-    display: block;
-    margin-top: 0.3rem;
-}
-
-/* ========== SEÇÃO CARDÁPIO ========== */
+/* Menu Section */
 .menu-section {
     padding: 3rem 0;
-    background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
 }
 
 .section-header {
@@ -249,7 +389,6 @@ body {
 .section-title {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -274,7 +413,7 @@ body {
     margin: 0.8rem 0 0 0;
 }
 
-/* Grid de Cervejas - Mobile First */
+/* Beer Grid */
 .beer-grid {
     display: flex;
     flex-direction: column;
@@ -282,7 +421,7 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* Card de Cerveja - Otimizado para mobile */
+/* Beer Card */
 .beer-card {
     background: rgba(20, 20, 25, 0.8);
     backdrop-filter: blur(10px);
@@ -296,6 +435,11 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    animation: fadeInUp 0.4s ease backwards;
+}
+
+.beer-card.hidden {
+    display: none;
 }
 
 .beer-card::before {
@@ -314,7 +458,6 @@ body {
 .beer-card:hover {
     transform: translateY(-4px);
     border-color: rgba(255, 140, 0, 0.4);
-    background: rgba(30, 30, 35, 0.95);
     box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.5);
 }
 
@@ -329,7 +472,6 @@ body {
 .beer-name {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #f5f5f5;
     transition: color 0.2s;
 }
 
@@ -376,12 +518,59 @@ body {
     color: #ff8c00;
 }
 
+/* Sinuca Card */
+.sinuca-card {
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.15), rgba(0, 0, 0, 0.6));
+    border-radius: 20px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.sinuca-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.sinuca-icon {
+    font-size: 2rem;
+    display: flex;
+    gap: 0.3rem;
+}
+
+.sinuca-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.sinuca-info p {
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+.sinuca-price {
+    text-align: right;
+}
+
+.sinuca-price .price-label {
+    font-size: 0.65rem;
+    color: #aaa;
+    display: block;
+}
+
+.sinuca-price .price-value {
+    font-size: 1.3rem;
+}
+
+/* Menu Note */
 .menu-note {
     text-align: center;
     padding: 1rem;
     background: rgba(255, 140, 0, 0.05);
     border-radius: 16px;
-    color: #ccaa7a;
     font-size: 0.75rem;
     display: flex;
     align-items: center;
@@ -391,10 +580,9 @@ body {
     flex-wrap: wrap;
 }
 
-/* ========== SEÇÃO SOBRE ========== */
+/* About Section */
 .about-section {
     padding: 3rem 0;
-    background: #0a0a0a;
 }
 
 .about-grid {
@@ -406,7 +594,6 @@ body {
 .about-description {
     font-size: 0.9rem;
     line-height: 1.6;
-    color: #b0b0b0;
     margin: 1rem 0;
 }
 
@@ -444,7 +631,6 @@ body {
 
 .info-item p, .info-item a {
     font-size: 0.8rem;
-    color: #c0c0c0;
     text-decoration: none;
     line-height: 1.4;
 }
@@ -474,6 +660,7 @@ body {
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
 }
 
+/* Features */
 .about-features {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -493,7 +680,6 @@ body {
 .feature-card:hover {
     transform: translateY(-3px);
     border-color: rgba(255, 140, 0, 0.3);
-    background: rgba(30, 30, 35, 0.8);
 }
 
 .feature-card i {
@@ -512,10 +698,55 @@ body {
     color: #aaa;
 }
 
-/* ========== SEÇÃO MAPA ========== */
+/* Payment Section */
+.payment-section {
+    padding: 3rem 0;
+}
+
+.payment-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.payment-item {
+    background: rgba(20, 20, 25, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 1.2rem;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.payment-item:hover {
+    transform: translateY(-2px);
+    border-color: #ff8c00;
+}
+
+.payment-item i {
+    color: #ff8c00;
+    font-size: 1.1rem;
+}
+
+.payment-note {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Map Section */
 .map-section {
     padding: 3rem 0;
-    background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
 }
 
 .map-wrapper {
@@ -556,7 +787,6 @@ body {
 
 .map-address-card p {
     font-size: 0.8rem;
-    color: #ccc;
     text-align: center;
 }
 
@@ -573,9 +803,8 @@ body {
     gap: 0.3rem;
 }
 
-/* ========== FOOTER ========== */
+/* Footer */
 .footer {
-    background: #020202;
     padding: 2rem 0 1rem;
     border-top: 1px solid rgba(255, 140, 0, 0.2);
 }
@@ -597,6 +826,12 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+}
+
+body[data-theme="light"] .footer-logo h3 {
+    background: linear-gradient(135deg, #1a1a1a, #ff8c00);
+    background-clip: text;
+    -webkit-background-clip: text;
 }
 
 .footer-logo p {
@@ -662,7 +897,7 @@ body {
     color: #ff6b6b;
 }
 
-/* ========== BACK TO TOP BUTTON ========== */
+/* Back to Top */
 .back-to-top {
     position: fixed;
     bottom: 1rem;
@@ -691,7 +926,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* ========== ANIMAÇÕES ========== */
+/* Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -701,20 +936,6 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(8px);
-    }
-}
-
-/* Animação de entrada dos cards */
-.beer-card {
-    animation: fadeInUp 0.4s ease backwards;
 }
 
 .beer-card:nth-child(1) { animation-delay: 0.05s; }
@@ -728,7 +949,7 @@ body {
 .beer-card:nth-child(9) { animation-delay: 0.45s; }
 .beer-card:nth-child(10) { animation-delay: 0.5s; }
 
-/* ========== TABLETS E DESKTOP ========== */
+/* Responsividade */
 @media (min-width: 768px) {
     .container {
         max-width: 720px;
@@ -764,10 +985,6 @@ body {
         gap: 2rem;
     }
     
-    .about-features {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
     .footer-links {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -781,12 +998,12 @@ body {
         padding: 0.8rem 1.5rem;
     }
     
-    .map-address-card p {
-        text-align: left;
-    }
-    
     .google-map {
         height: 350px;
+    }
+    
+    .sinuca-content {
+        flex-wrap: nowrap;
     }
 }
 
@@ -802,11 +1019,6 @@ body {
     .title-location {
         font-size: 3rem;
     }
-    
-    .beer-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
 }
 
 @media (min-width: 1280px) {
@@ -819,7 +1031,7 @@ body {
     }
 }
 
-/* Scrollbar custom */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 4px;
 }
