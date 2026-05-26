@@ -1,10 +1,10 @@
 /**
  * AVENIDA PUB BOCAINA
  * Script principal - Cardápio digital premium
- * Mobile First
+ * Com Busca/Filtro, Dark/Light Mode e PWA
  */
 
-// Dados das cervejas (600ml)
+// Dados das cervejas
 const beers = [
     { name: "Heineken", price: 14, style: "Lager Premium" },
     { name: "Corona", price: 14, style: "Pilsener Leve" },
@@ -18,7 +18,10 @@ const beers = [
     { name: "Amstel", price: 10, style: "Sabor Encorpado" }
 ];
 
-// Função para formatar preço
+// Elementos DOM
+let beerCards = [];
+
+// Formatar preço
 const formatPrice = (price) => {
     return price.toLocaleString('pt-BR', { 
         minimumFractionDigits: 2, 
@@ -29,17 +32,17 @@ const formatPrice = (price) => {
 // Criar cards das cervejas
 const createBeerCards = () => {
     const beerContainer = document.getElementById('beerList');
-    
-    if (!beerContainer) {
-        console.error('Container #beerList não encontrado');
-        return;
-    }
+    if (!beerContainer) return;
     
     beerContainer.innerHTML = '';
+    beerCards = [];
     
-    beers.forEach((beer) => {
+    beers.forEach((beer, index) => {
         const card = document.createElement('div');
         card.className = 'beer-card';
+        card.setAttribute('data-name', beer.name.toLowerCase());
+        card.setAttribute('data-price', beer.price);
+        card.style.animationDelay = `${0.05 * (index + 1)}s`;
         
         card.innerHTML = `
             <div class="beer-info">
@@ -56,7 +59,6 @@ const createBeerCards = () => {
             </div>
         `;
         
-        // Feedback ao tocar/clicar
         card.addEventListener('click', () => {
             card.style.transform = 'scale(0.98)';
             setTimeout(() => {
@@ -65,14 +67,145 @@ const createBeerCards = () => {
         });
         
         beerContainer.appendChild(card);
+        beerCards.push(card);
     });
     
-    console.log(`✅ ${beers.length} cervejas carregadas`);
+    updateSearchCount(beers.length);
 };
 
-// Animação ao scroll
+// ========== SISTEMA DE BUSCA/FILTRO ==========
+const searchInput = document.getElementById('searchInput');
+const clearSearchBtn = document.getElementById('clearSearch');
+
+const filterBeers = () => {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    let visibleCount = 0;
+    
+    beerCards.forEach((card, index) => {
+        const beerName = card.getAttribute('data-name');
+        if (searchTerm === '' || beerName.includes(searchTerm)) {
+            card.classList.remove('hidden');
+            visibleCount++;
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+    
+    updateSearchCount(visibleCount);
+};
+
+const updateSearchCount = (count) => {
+    const searchCountSpan = document.getElementById('searchCount');
+    if (searchCountSpan) {
+        if (count === 0) {
+            searchCountSpan.innerHTML = '🍺 Nenhuma cerveja encontrada';
+            searchCountSpan.style.color = '#ff8c00';
+        } else if (count === beers.length) {
+            searchCountSpan.innerHTML = `🍺 ${count} cervejas disponíveis`;
+            searchCountSpan.style.color = '#888';
+        } else {
+            searchCountSpan.innerHTML = `🍺 ${count} de ${beers.length} cervejas encontradas`;
+            searchCountSpan.style.color = '#ffb347';
+        }
+    }
+};
+
+const clearSearch = () => {
+    if (searchInput) {
+        searchInput.value = '';
+        filterBeers();
+        searchInput.focus();
+    }
+};
+
+if (searchInput) {
+    searchInput.addEventListener('input', filterBeers);
+}
+if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', clearSearch);
+}
+
+// ========== DARK/LIGHT MODE TOGGLE ==========
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+const loadTheme = () => {
+    const savedTheme = localStorage.getItem('avenida-pub-theme');
+    if (savedTheme) {
+        body.setAttribute('data-theme', savedTheme);
+    } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    }
+};
+
+const toggleTheme = () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('avenida-pub-theme', newTheme);
+};
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+}
+loadTheme();
+
+// ========== PWA - SERVICE WORKER ==========
+const registerServiceWorker = async () => {
+    if ('serviceWorker' in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.register('/sw.js');
+            console.log('✅ Service Worker registrado com sucesso!');
+        } catch (error) {
+            console.log('⚠️ Service Worker falhou:', error);
+        }
+    }
+};
+
+// Verificar se pode instalar como PWA
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    // Mostrar notificação para instalar
+    const installBanner = document.createElement('div');
+    installBanner.className = 'install-banner';
+    installBanner.innerHTML = `
+        <div class="install-banner-content">
+            <i class="fas fa-download"></i>
+            <span>Instale nosso app para uma experiência melhor!</span>
+            <button id="installAppBtn">Instalar</button>
+            <button id="closeBannerBtn"><i class="fas fa-times"></i></button>
+        </div>
+    `;
+    
+    const closeBanner = () => installBanner.remove();
+    installBanner.querySelector('#closeBannerBtn')?.addEventListener('click', closeBanner);
+    installBanner.querySelector('#installAppBtn')?.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response: ${outcome}`);
+            deferredPrompt = null;
+        }
+        closeBanner();
+    });
+    
+    document.body.appendChild(installBanner);
+    
+    setTimeout(() => {
+        if (document.body.contains(installBanner)) {
+            installBanner.style.opacity = '0';
+            setTimeout(() => installBanner.remove(), 300);
+        }
+    }, 10000);
+});
+
+// ========== ANIMAÇÃO AO SCROLL ==========
 const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.beer-card, .feature-card, .info-card, .map-wrapper');
+    const elements = document.querySelectorAll('.beer-card, .feature-card, .info-card, .map-wrapper, .payment-item, .sinuca-card');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -92,7 +225,7 @@ const animateOnScroll = () => {
     });
 };
 
-// Botão voltar ao topo
+// ========== BACK TO TOP ==========
 const backToTopButton = () => {
     const button = document.getElementById('backToTop');
     if (!button) return;
@@ -110,7 +243,7 @@ const backToTopButton = () => {
     });
 };
 
-// Navegação suave
+// ========== NAVEGAÇÃO SUAVE ==========
 const smoothNavigation = () => {
     const links = document.querySelectorAll('a[href^="#"]');
     
@@ -131,7 +264,7 @@ const smoothNavigation = () => {
     });
 };
 
-// Atualizar ano no footer
+// ========== ATUALIZAR ANO NO FOOTER ==========
 const addCurrentYear = () => {
     const yearElement = document.querySelector('.footer-bottom p:first-child');
     if (yearElement) {
@@ -140,13 +273,16 @@ const addCurrentYear = () => {
     }
 };
 
-// Inicialização
+// ========== INICIALIZAÇÃO ==========
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Avenida Pub Bocaina - Inicializando...');
+    
     createBeerCards();
     animateOnScroll();
     backToTopButton();
     smoothNavigation();
     addCurrentYear();
+    registerServiceWorker();
     
-    console.log('🍺 Avenida Pub Bocaina - Pronto para servir!');
+    console.log('✅ Site pronto!');
 });
