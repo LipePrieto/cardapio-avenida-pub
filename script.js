@@ -1,19 +1,18 @@
 /**
  * AVENIDA PUB BOCAINA
- * Script principal - Com Skeleton Screen e Mais Pedidas
- * Brahma e Boa são as mais pedidas 🔥
+ * Script principal - Com Brahma e Boa no TOPO + Mais Pedidas
  */
 
-// Dados das cervejas (Brahma e Boa são as mais pedidas)
+// Dados das cervejas (Brahma e Boa agora estão no TOPO)
 const beers = [
+    { name: "Brahma", price: 10, style: "Clássica Brasileira", top: true },   // 🔥 MAIS PEDIDA - TOPO
+    { name: "Boa", price: 10, style: "Puro Sabor", top: true },               // 🔥 MAIS PEDIDA - TOPO
     { name: "Heineken", price: 14, style: "Lager Premium", top: false },
     { name: "Corona", price: 14, style: "Pilsener Leve", top: false },
     { name: "Stella Artois", price: 13, style: "Puro Malte", top: false },
     { name: "Spaten", price: 12, style: "München Lager", top: false },
     { name: "Original", price: 11, style: "Leve & Refrescante", top: false },
     { name: "Budweiser", price: 10, style: "Lager Americana", top: false },
-    { name: "Boa", price: 10, style: "Puro Sabor", top: true },      // 🔥 Mais Pedida
-    { name: "Brahma", price: 10, style: "Clássica Brasileira", top: true }, // 🔥 Mais Pedida
     { name: "Skol", price: 10, style: "Leveza Única", top: false },
     { name: "Amstel", price: 10, style: "Sabor Encorpado", top: false }
 ];
@@ -54,7 +53,7 @@ const hideSkeleton = () => {
     if (menuNote) menuNote.style.display = 'flex';
 };
 
-// Criar cards das cervejas com selo "Mais Pedida"
+// Criar cards das cervejas
 const createBeerCards = () => {
     const beerContainer = document.getElementById('beerList');
     if (!beerContainer) return;
@@ -84,7 +83,7 @@ const createBeerCards = () => {
             </div>
         `;
         
-        // Adiciona selo "Mais Pedida" para Brahma e Boa
+        // Adiciona selo "Mais Pedida" apenas para Brahma e Boa
         if (beer.top) {
             const topBadge = document.createElement('div');
             topBadge.className = 'top-badge';
@@ -106,6 +105,7 @@ const createBeerCards = () => {
     });
     
     updateSearchCount(beers.length);
+    console.log('✅ Brahma e Boa estão no TOPO do cardápio! 🔥');
 };
 
 // ========== SISTEMA DE BUSCA/FILTRO ==========
@@ -278,13 +278,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mostra skeleton screen
     showSkeleton();
     
-    // Simula carregamento (igual a um carregamento real)
+    // Simula carregamento
     setTimeout(() => {
         createBeerCards();
         animateOnScroll();
         hideSkeleton();
-        console.log('✅ Cardápio carregado! Brahma e Boa são as mais pedidas 🔥');
-    }, 800); // 800ms de carregamento simulado
+        console.log('✅ Cardápio carregado! Brahma e Boa estão no TOPO 🔥');
+    }, 800);
     
     backToTopButton();
     smoothNavigation();
