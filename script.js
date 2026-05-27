@@ -1,9 +1,8 @@
 /**
  * AVENIDA PUB BOCAINA
- * Script principal - Com imagens das cervejas (nomes corretos)
+ * Script completo - Com imagens, busca, skeleton screen e dark/light mode
  */
 
-// Dados das cervejas (com os nomes dos arquivos que você acabou de fazer upload)
 const beers = [
     { name: "Brahma", price: 10, style: "Clássica Brasileira", top: true, image: "images/brahma.png" },
     { name: "Boa", price: 10, style: "Puro Sabor", top: true, image: "images/boa.png" },
@@ -17,18 +16,12 @@ const beers = [
     { name: "Amstel", price: 10, style: "Sabor Encorpado", top: false, image: "images/amstel.png" }
 ];
 
-// Elementos DOM
 let beerCards = [];
 
-// Formatar preço
 const formatPrice = (price) => {
-    return price.toLocaleString('pt-BR', { 
-        minimumFractionDigits: 2, 
-        maximumFractionDigits: 2 
-    });
+    return price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
-// Simular carregamento com Skeleton Screen
 const showSkeleton = () => {
     const skeleton = document.getElementById('skeletonLoader');
     const beerList = document.getElementById('beerList');
@@ -53,7 +46,6 @@ const hideSkeleton = () => {
     if (menuNote) menuNote.style.display = 'flex';
 };
 
-// Criar cards das cervejas COM IMAGENS
 const createBeerCards = () => {
     const beerContainer = document.getElementById('beerList');
     if (!beerContainer) return;
@@ -83,7 +75,6 @@ const createBeerCards = () => {
             </div>
         `;
         
-        // Adiciona selo "Mais Pedida" para Brahma e Boa
         if (beer.top) {
             const topBadge = document.createElement('div');
             topBadge.className = 'top-badge';
@@ -91,13 +82,11 @@ const createBeerCards = () => {
             card.appendChild(topBadge);
         }
         
-        // Evento de toque/clique
         card.addEventListener('click', () => {
             card.style.transform = 'scale(0.98)';
             setTimeout(() => {
                 card.style.transform = '';
             }, 150);
-            console.log(`🍺 ${beer.name} selecionada - R$ ${formatPrice(beer.price)}`);
         });
         
         beerContainer.appendChild(card);
@@ -105,10 +94,9 @@ const createBeerCards = () => {
     });
     
     updateSearchCount(beers.length);
-    console.log('✅ Cardápio com imagens carregado!');
 };
 
-// ========== SISTEMA DE BUSCA/FILTRO ==========
+// Busca
 const searchInput = document.getElementById('searchInput');
 const clearSearchBtn = document.getElementById('clearSearch');
 
@@ -153,14 +141,10 @@ const clearSearch = () => {
     }
 };
 
-if (searchInput) {
-    searchInput.addEventListener('input', filterBeers);
-}
-if (clearSearchBtn) {
-    clearSearchBtn.addEventListener('click', clearSearch);
-}
+if (searchInput) searchInput.addEventListener('input', filterBeers);
+if (clearSearchBtn) clearSearchBtn.addEventListener('click', clearSearch);
 
-// ========== DARK/LIGHT MODE TOGGLE ==========
+// Dark/Light Mode
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
@@ -174,7 +158,6 @@ const loadTheme = () => {
             body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
         }
     } catch (e) {
-        console.log('Erro ao carregar tema:', e);
         body.setAttribute('data-theme', 'dark');
     }
 };
@@ -185,17 +168,13 @@ const toggleTheme = () => {
     body.setAttribute('data-theme', newTheme);
     try {
         localStorage.setItem('avenida-pub-theme', newTheme);
-    } catch (e) {
-        console.log('Erro ao salvar tema:', e);
-    }
+    } catch (e) {}
 };
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
-}
+if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 loadTheme();
 
-// ========== ANIMAÇÃO AO SCROLL ==========
+// Scroll animations
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('.beer-card, .feature-card, .info-card, .map-wrapper, .payment-item, .sinuca-card');
     
@@ -217,17 +196,13 @@ const animateOnScroll = () => {
     });
 };
 
-// ========== BACK TO TOP ==========
+// Back to top
 const backToTopButton = () => {
     const button = document.getElementById('backToTop');
     if (!button) return;
     
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            button.classList.add('show');
-        } else {
-            button.classList.remove('show');
-        }
+        button.classList.toggle('show', window.scrollY > 300);
     });
     
     button.addEventListener('click', () => {
@@ -235,53 +210,42 @@ const backToTopButton = () => {
     });
 };
 
-// ========== NAVEGAÇÃO SUAVE ==========
+// Smooth navigation
 const smoothNavigation = () => {
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
             if (targetId === '#') return;
-            
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
 };
 
-// ========== ATUALIZAR ANO NO FOOTER ==========
+// Footer year
 const addCurrentYear = () => {
     const yearElement = document.querySelector('.footer-bottom p:first-child');
     if (yearElement) {
-        const currentYear = new Date().getFullYear();
-        yearElement.innerHTML = `&copy; ${currentYear} Avenida Pub Bocaina. Todos os direitos reservados.`;
+        yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Avenida Pub Bocaina. Todos os direitos reservados.`;
     }
 };
 
-// ========== FIX PARA SAFARI ==========
+// Safari fix
 const fixSafariVH = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
 };
 
-// ========== INICIALIZAÇÃO ==========
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Avenida Pub Bocaina - Inicializando...');
-    
     showSkeleton();
     
     setTimeout(() => {
         createBeerCards();
         animateOnScroll();
         hideSkeleton();
-        console.log('✅ Cardápio com imagens carregado! Brahma e Boa são as mais pedidas 🔥');
     }, 800);
     
     backToTopButton();
