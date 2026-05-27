@@ -1,6 +1,6 @@
 /* ============================================
-   AVENIDA PUB BOCAINA
-   Com Skeleton Screen e Mais Pedidas
+   AVENIDA PUB BOCAINA - COMPLETO
+   Com foto no Hero, Skeleton Screen, Dark/Light Mode
    ============================================ */
 
 * {
@@ -35,10 +35,6 @@ body[data-theme="dark"] {
 body[data-theme="light"] {
     background-color: #f5f5f5;
     color: #1a1a1a;
-}
-
-body[data-theme="light"] .hero {
-    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
 }
 
 body[data-theme="light"] .hero-overlay {
@@ -78,6 +74,24 @@ body[data-theme="light"] .footer {
     border-top-color: rgba(255, 140, 0, 0.3);
 }
 
+/* ========== HERO COM FOTO PERSONALIZADA ========== */
+.hero-with-image {
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('../images/fachada.webp');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+    .hero-with-image {
+        background-attachment: fixed;
+    }
+}
+
+.hero-with-image .hero-overlay {
+    background: none;
+}
+
 /* ========== SKELETON SCREEN ========== */
 .skeleton-loader {
     display: flex;
@@ -97,16 +111,11 @@ body[data-theme="light"] .footer {
 
 body[data-theme="light"] .skeleton-card {
     background: linear-gradient(90deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 75%);
-    background-size: 200% 100%;
 }
 
 @keyframes skeleton-loading {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 @media (min-width: 768px) {
@@ -124,9 +133,9 @@ body[data-theme="light"] .skeleton-card {
 }
 
 /* ========== SELO MAIS PEDIDA ========== */
-/* ========== SELO MAIS PEDIDA ========== */
 .beer-card {
     position: relative;
+    padding-top: 1.2rem;
 }
 
 .top-badge {
@@ -141,7 +150,6 @@ body[data-theme="light"] .skeleton-card {
     border-radius: 20px;
     z-index: 10;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    letter-spacing: 0.5px;
     display: flex;
     align-items: center;
     gap: 0.2rem;
@@ -154,14 +162,40 @@ body[data-theme="light"] .skeleton-card {
     font-size: 0.65rem;
 }
 
-/* Ajuste para não sobrepor o conteúdo */
-.beer-card {
-    padding-top: 1.2rem;
-}
-
-/* No modo light também funciona */
 body[data-theme="light"] .top-badge {
     color: #1a1a1a;
+}
+
+/* ========== IMAGENS DAS CERVEJAS ========== */
+.beer-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.beer-image {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.beer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+    .beer-image {
+        width: 65px;
+        height: 65px;
+    }
 }
 
 /* ========== THEME TOGGLE ========== */
@@ -182,12 +216,10 @@ body[data-theme="light"] .top-badge {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .theme-toggle i {
     font-size: 1.2rem;
-    transition: all 0.3s;
     pointer-events: none;
 }
 
@@ -221,7 +253,7 @@ body[data-theme="light"] .theme-toggle .fa-moon {
     margin: 0 auto;
 }
 
-/* Hero Section */
+/* Hero */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -334,7 +366,6 @@ body[data-theme="light"] .title-line {
     font-size: 0.7rem;
     color: #ffb347;
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 140, 0, 0.2);
     display: inline-flex;
     align-items: center;
@@ -363,7 +394,6 @@ body[data-theme="light"] .title-line {
     font-size: 0.9rem;
     width: 100%;
     max-width: 250px;
-    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
 }
 
@@ -380,7 +410,6 @@ body[data-theme="light"] .title-line {
 .btn-secondary {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     color: #fff;
     border: 1px solid rgba(255, 140, 0, 0.5);
 }
@@ -388,10 +417,6 @@ body[data-theme="light"] .title-line {
 body[data-theme="light"] .btn-secondary {
     background: rgba(0, 0, 0, 0.1);
     color: #333;
-}
-
-.btn-secondary:active {
-    transform: scale(0.97);
 }
 
 .hero-scroll-indicator {
@@ -410,7 +435,7 @@ body[data-theme="light"] .btn-secondary {
     margin-top: 0.3rem;
 }
 
-/* Search Bar */
+/* Search */
 .search-container {
     margin-bottom: 1.5rem;
 }
@@ -420,11 +445,9 @@ body[data-theme="light"] .btn-secondary {
     align-items: center;
     background: rgba(20, 20, 25, 0.8);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-radius: 50px;
     padding: 0.5rem 1rem;
     border: 1px solid rgba(255, 140, 0, 0.2);
-    transition: all 0.3s;
 }
 
 .search-box:focus-within {
@@ -445,7 +468,6 @@ body[data-theme="light"] .btn-secondary {
     font-size: 0.9rem;
     color: inherit;
     outline: none;
-    -webkit-appearance: none;
 }
 
 .search-box input::placeholder {
@@ -459,12 +481,6 @@ body[data-theme="light"] .btn-secondary {
     cursor: pointer;
     padding: 0.3rem;
     border-radius: 50%;
-    transition: all 0.2s;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.clear-search:active {
-    transform: scale(0.9);
 }
 
 .search-info {
@@ -474,7 +490,7 @@ body[data-theme="light"] .btn-secondary {
     color: #888;
 }
 
-/* Menu Section */
+/* Menu */
 .menu-section {
     padding: 3rem 0;
 }
@@ -532,11 +548,9 @@ body[data-theme="light"] .btn-secondary {
     margin-bottom: 1.5rem;
 }
 
-/* Beer Card */
 .beer-card {
     background: rgba(20, 20, 25, 0.8);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 1rem;
     transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
@@ -545,27 +559,11 @@ body[data-theme="light"] .btn-secondary {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
     animation: fadeInUp 0.4s ease backwards;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .beer-card.hidden {
     display: none;
-}
-
-.beer-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, #ff8c00, #ff6b00);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-    transform-origin: bottom;
 }
 
 .beer-card:active {
@@ -579,14 +577,12 @@ body[data-theme="light"] .btn-secondary {
 .beer-name {
     font-size: 1.2rem;
     font-weight: 700;
-    transition: color 0.2s;
 }
 
 .beer-volume {
     font-size: 0.65rem;
     color: #ff8c00;
     margin-top: 0.2rem;
-    letter-spacing: 0.5px;
 }
 
 .beer-price {
@@ -609,14 +605,7 @@ body[data-theme="light"] .btn-secondary {
     margin-right: 2px;
 }
 
-.beer-icon {
-    font-size: 1.5rem;
-    opacity: 0.3;
-    transition: opacity 0.3s;
-    margin-top: 0.3rem;
-}
-
-/* Sinuca Card */
+/* Sinuca */
 .sinuca-card {
     background: linear-gradient(135deg, rgba(255, 140, 0, 0.15), rgba(0, 0, 0, 0.6));
     border-radius: 20px;
@@ -664,7 +653,6 @@ body[data-theme="light"] .btn-secondary {
     font-size: 1.3rem;
 }
 
-/* Menu Note */
 .menu-note {
     text-align: center;
     padding: 1rem;
@@ -679,7 +667,7 @@ body[data-theme="light"] .btn-secondary {
     flex-wrap: wrap;
 }
 
-/* About Section */
+/* About */
 .about-section {
     padding: 3rem 0;
 }
@@ -699,7 +687,6 @@ body[data-theme="light"] .btn-secondary {
 .info-card {
     background: rgba(20, 20, 25, 0.6);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 1.2rem;
     border: 1px solid rgba(255, 140, 0, 0.15);
@@ -733,14 +720,7 @@ body[data-theme="light"] .btn-secondary {
     font-size: 0.8rem;
     text-decoration: none;
     line-height: 1.4;
-}
-
-.info-item a {
     color: inherit;
-}
-
-.info-item a:hover {
-    color: #ff8c00;
 }
 
 .social-link {
@@ -754,17 +734,9 @@ body[data-theme="light"] .btn-secondary {
     color: #000;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s;
-    font-size: 0.85rem;
     width: 100%;
-    -webkit-tap-highlight-color: transparent;
 }
 
-.social-link:active {
-    transform: scale(0.97);
-}
-
-/* Features */
 .about-features {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -774,16 +746,10 @@ body[data-theme="light"] .btn-secondary {
 .feature-card {
     background: rgba(20, 20, 25, 0.6);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 1.2rem 0.8rem;
     text-align: center;
-    transition: all 0.3s;
     border: 1px solid rgba(255, 140, 0, 0.1);
-}
-
-.feature-card:active {
-    transform: scale(0.97);
 }
 
 .feature-card i {
@@ -802,7 +768,7 @@ body[data-theme="light"] .btn-secondary {
     color: #aaa;
 }
 
-/* Payment Section */
+/* Payment */
 .payment-section {
     padding: 3rem 0;
 }
@@ -818,7 +784,6 @@ body[data-theme="light"] .btn-secondary {
 .payment-item {
     background: rgba(20, 20, 25, 0.6);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     padding: 0.7rem 1.2rem;
     border-radius: 40px;
     font-size: 0.8rem;
@@ -830,7 +795,6 @@ body[data-theme="light"] .btn-secondary {
 
 .payment-item i {
     color: #ff8c00;
-    font-size: 1rem;
 }
 
 .payment-note {
@@ -841,10 +805,9 @@ body[data-theme="light"] .btn-secondary {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
 }
 
-/* Map Section */
+/* Map */
 .map-section {
     padding: 3rem 0;
 }
@@ -855,14 +818,12 @@ body[data-theme="light"] .btn-secondary {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 140, 0, 0.2);
     margin-bottom: 1rem;
-    -webkit-overflow-scrolling: touch;
 }
 
 .google-map {
     width: 100%;
     height: 250px;
     border: none;
-    display: block;
 }
 
 .map-info {
@@ -876,7 +837,6 @@ body[data-theme="light"] .btn-secondary {
     gap: 0.8rem;
     background: rgba(20, 20, 25, 0.8);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     padding: 1rem;
     border-radius: 16px;
     border: 1px solid rgba(255, 140, 0, 0.2);
@@ -887,11 +847,6 @@ body[data-theme="light"] .btn-secondary {
     color: #ff8c00;
 }
 
-.map-address-card p {
-    font-size: 0.8rem;
-    text-align: center;
-}
-
 .map-link-btn {
     background: rgba(255, 140, 0, 0.15);
     padding: 0.5rem 1rem;
@@ -899,15 +854,9 @@ body[data-theme="light"] .btn-secondary {
     color: #ffb347;
     text-decoration: none;
     font-size: 0.75rem;
-    transition: all 0.2s;
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.map-link-btn:active {
-    transform: scale(0.97);
 }
 
 /* Footer */
@@ -933,12 +882,6 @@ body[data-theme="light"] .btn-secondary {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-}
-
-body[data-theme="light"] .footer-logo h3 {
-    background: linear-gradient(135deg, #1a1a1a, #ff8c00);
-    background-clip: text;
-    -webkit-background-clip: text;
 }
 
 .footer-logo p {
@@ -972,11 +915,6 @@ body[data-theme="light"] .footer-logo h3 {
     color: #888;
     line-height: 1.5;
     text-decoration: none;
-    transition: color 0.2s;
-}
-
-.footer-column a:hover {
-    color: #ff8c00;
 }
 
 .footer-social-link {
@@ -1022,7 +960,6 @@ body[data-theme="light"] .footer-logo h3 {
     transition: all 0.3s;
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
-    -webkit-tap-highlight-color: transparent;
 }
 
 .back-to-top.show {
@@ -1030,11 +967,7 @@ body[data-theme="light"] .footer-logo h3 {
     visibility: visible;
 }
 
-.back-to-top:active {
-    transform: scale(0.95);
-}
-
-/* Animations */
+/* Animações */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1107,10 +1040,6 @@ body[data-theme="light"] .footer-logo h3 {
     .google-map {
         height: 350px;
     }
-    
-    .sinuca-content {
-        flex-wrap: nowrap;
-    }
 }
 
 @media (min-width: 1024px) {
@@ -1137,21 +1066,6 @@ body[data-theme="light"] .footer-logo h3 {
     }
 }
 
-/* Safari fixes */
-@supports (backdrop-filter: blur(10px)) {
-    .beer-card, .info-card, .feature-card, .search-box, .payment-item {
-        backdrop-filter: blur(10px);
-    }
-}
-
-input:focus, button:focus, a:focus {
-    outline: none;
-}
-
-button, a, .beer-card, .feature-card {
-    cursor: pointer;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 4px;
@@ -1162,36 +1076,4 @@ button, a, .beer-card, .feature-card {
 ::-webkit-scrollbar-thumb {
     background: #ff8c2c;
     border-radius: 4px;
-}
-
-/* ========== IMAGENS DAS CERVEJAS ========== */
-.beer-card {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.beer-image {
-    width: 55px;
-    height: 55px;
-    flex-shrink: 0;
-    background: rgba(0,0,0,0.2);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.beer-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 12px;
-}
-
-@media (min-width: 768px) {
-    .beer-image {
-        width: 65px;
-        height: 65px;
-    }
 }
