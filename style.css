@@ -1,6 +1,6 @@
 /* ============================================
    AVENIDA PUB BOCAINA - COMPLETO
-   Com foto no Hero, Skeleton Screen, Dark/Light Mode
+   Com foto no Hero, overlay degradê premium
    ============================================ */
 
 * {
@@ -38,12 +38,12 @@ body[data-theme="light"] {
 }
 
 body[data-theme="light"] .hero-overlay {
-    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.7) 100%);
+    background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 100%);
 }
 
 body[data-theme="light"] .hero-subtitle,
 body[data-theme="light"] .hero-tags span {
-    color: #333;
+    color: #fff;
 }
 
 body[data-theme="light"] .beer-card,
@@ -74,22 +74,77 @@ body[data-theme="light"] .footer {
     border-top-color: rgba(255, 140, 0, 0.3);
 }
 
-/* ========== HERO COM FOTO PERSONALIZADA ========== */
-.hero-with-image {
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('images/fachada.webp');
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
+/* ========== HERO COM FOTO E DEGRADÊ PREMIUM ========== */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
 }
 
+.hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/fachada.webp') center 30% / cover no-repeat;
+    z-index: 0;
+}
+
+/* DEGRADÊ PREMIUM - 3 OPÇÕES (descomente a que preferir) */
+
+/* OPÇÃO 1: Degradê escuro suave (RECOMENDADO) */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+}
+
+/* OPÇÃO 2: Degradê com toque laranja (mais quente)
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(255,140,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+    z-index: 1;
+}
+*/
+
+/* OPÇÃO 3: Degradê mais dramático (escuro nas bordas)
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+}
+*/
+
+/* Efeito de parallax suave no desktop */
 @media (min-width: 768px) {
-    .hero-with-image {
+    .hero-bg-image {
         background-attachment: fixed;
     }
 }
 
-.hero-with-image .hero-overlay {
-    background: none;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 2rem 1rem;
+    animation: fadeInUp 0.8s ease;
 }
 
 /* ========== SKELETON SCREEN ========== */
@@ -253,33 +308,7 @@ body[data-theme="light"] .theme-toggle .fa-moon {
     margin: 0 auto;
 }
 
-/* Hero */
-.hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    padding: 2rem 1rem;
-    animation: fadeInUp 0.8s ease;
-}
-
+/* Hero Elements */
 .hero-badge {
     display: inline-block;
     background: rgba(255, 140, 0, 0.15);
@@ -312,7 +341,7 @@ body[data-theme="light"] .theme-toggle .fa-moon {
 }
 
 body[data-theme="light"] .title-line {
-    background: linear-gradient(135deg, #1a1a1a 0%, #ff8c00 50%, #ff6b00 100%);
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFD1A0 50%, #FF9F3D 100%);
     background-clip: text;
     -webkit-background-clip: text;
 }
@@ -349,6 +378,7 @@ body[data-theme="light"] .title-line {
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
     padding: 0 0.5rem;
+    color: #fff;
 }
 
 .hero-tags {
@@ -360,13 +390,13 @@ body[data-theme="light"] .title-line {
 }
 
 .hero-tags span {
-    background: rgba(255, 140, 0, 0.1);
+    background: rgba(255, 140, 0, 0.15);
     padding: 0.35rem 0.8rem;
     border-radius: 30px;
     font-size: 0.7rem;
     color: #ffb347;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 140, 0, 0.2);
+    border: 1px solid rgba(255, 140, 0, 0.3);
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
@@ -408,15 +438,15 @@ body[data-theme="light"] .title-line {
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     color: #fff;
     border: 1px solid rgba(255, 140, 0, 0.5);
 }
 
 body[data-theme="light"] .btn-secondary {
-    background: rgba(0, 0, 0, 0.1);
-    color: #333;
+    background: rgba(0, 0, 0, 0.15);
+    color: #fff;
 }
 
 .hero-scroll-indicator {
@@ -428,6 +458,7 @@ body[data-theme="light"] .btn-secondary {
     color: #ffb347;
     font-size: 0.7rem;
     animation: bounce 2s infinite;
+    z-index: 2;
 }
 
 .hero-scroll-indicator i {
@@ -493,6 +524,11 @@ body[data-theme="light"] .btn-secondary {
 /* Menu */
 .menu-section {
     padding: 3rem 0;
+    background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+}
+
+body[data-theme="light"] .menu-section {
+    background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
 }
 
 .section-header {
