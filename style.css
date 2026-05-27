@@ -124,32 +124,44 @@ body[data-theme="light"] .skeleton-card {
 }
 
 /* ========== SELO MAIS PEDIDA ========== */
+/* ========== SELO MAIS PEDIDA ========== */
 .beer-card {
     position: relative;
 }
 
 .top-badge {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: -0.5rem;
+    left: 1rem;
     background: linear-gradient(135deg, #ff6b00, #ff8c00);
     color: #000;
     font-size: 0.6rem;
     font-weight: 800;
-    padding: 0.2rem 0.6rem;
+    padding: 0.25rem 0.8rem;
     border-radius: 20px;
     z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
     gap: 0.2rem;
+    white-space: nowrap;
 }
 
 .top-badge::before {
     content: "🔥";
     margin-right: 0.2rem;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
+}
+
+/* Ajuste para não sobrepor o conteúdo */
+.beer-card {
+    padding-top: 1.2rem;
+}
+
+/* No modo light também funciona */
+body[data-theme="light"] .top-badge {
+    color: #1a1a1a;
 }
 
 /* ========== THEME TOGGLE ========== */
