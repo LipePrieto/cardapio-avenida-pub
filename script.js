@@ -1,20 +1,20 @@
 /**
  * AVENIDA PUB BOCAINA
- * Script principal - Com Brahma e Boa no TOPO + Mais Pedidas
+ * Script principal - Com imagens das cervejas (nomes corretos)
  */
 
-// Dados das cervejas (Brahma e Boa agora estão no TOPO)
+// Dados das cervejas (com os nomes dos arquivos que você acabou de fazer upload)
 const beers = [
-    { name: "Brahma", price: 10, style: "Clássica Brasileira", top: true },   // 🔥 MAIS PEDIDA - TOPO
-    { name: "Boa", price: 10, style: "Puro Sabor", top: true },               // 🔥 MAIS PEDIDA - TOPO
-    { name: "Heineken", price: 14, style: "Lager Premium", top: false },
-    { name: "Corona", price: 14, style: "Pilsener Leve", top: false },
-    { name: "Stella Artois", price: 13, style: "Puro Malte", top: false },
-    { name: "Spaten", price: 12, style: "München Lager", top: false },
-    { name: "Original", price: 11, style: "Leve & Refrescante", top: false },
-    { name: "Budweiser", price: 10, style: "Lager Americana", top: false },
-    { name: "Skol", price: 10, style: "Leveza Única", top: false },
-    { name: "Amstel", price: 10, style: "Sabor Encorpado", top: false }
+    { name: "Brahma", price: 10, style: "Clássica Brasileira", top: true, image: "images/brahma.png" },
+    { name: "Boa", price: 10, style: "Puro Sabor", top: true, image: "images/boa.png" },
+    { name: "Heineken", price: 14, style: "Lager Premium", top: false, image: "images/heineken.png" },
+    { name: "Corona", price: 14, style: "Pilsener Leve", top: false, image: "images/corona.png" },
+    { name: "Stella Artois", price: 13, style: "Puro Malte", top: false, image: "images/stella.png" },
+    { name: "Spaten", price: 12, style: "München Lager", top: false, image: "images/spaten.png" },
+    { name: "Original", price: 11, style: "Leve & Refrescante", top: false, image: "images/original.png" },
+    { name: "Budweiser", price: 10, style: "Lager Americana", top: false, image: "images/budweiser.png" },
+    { name: "Skol", price: 10, style: "Leveza Única", top: false, image: "images/skol.png" },
+    { name: "Amstel", price: 10, style: "Sabor Encorpado", top: false, image: "images/amstel.png" }
 ];
 
 // Elementos DOM
@@ -53,7 +53,7 @@ const hideSkeleton = () => {
     if (menuNote) menuNote.style.display = 'flex';
 };
 
-// Criar cards das cervejas
+// Criar cards das cervejas COM IMAGENS
 const createBeerCards = () => {
     const beerContainer = document.getElementById('beerList');
     if (!beerContainer) return;
@@ -69,6 +69,9 @@ const createBeerCards = () => {
         card.style.animationDelay = `${0.05 * (index + 1)}s`;
         
         card.innerHTML = `
+            <div class="beer-image">
+                <img src="${beer.image}" alt="${beer.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ctext x=\'50\' y=\'70\' font-size=\'50\' text-anchor=\'middle\'%3E🍺%3C/text%3E%3C/svg%3E'">
+            </div>
             <div class="beer-info">
                 <div class="beer-name">${beer.name}</div>
                 <div class="beer-volume">🍺 ${beer.style} • 600ml</div>
@@ -77,13 +80,10 @@ const createBeerCards = () => {
                 <div class="price-value">
                     <span class="price-currency">R$</span> ${formatPrice(beer.price).replace('.', ',')}
                 </div>
-                <div class="beer-icon">
-                    <i class="fas fa-beer"></i>
-                </div>
             </div>
         `;
         
-        // Adiciona selo "Mais Pedida" apenas para Brahma e Boa
+        // Adiciona selo "Mais Pedida" para Brahma e Boa
         if (beer.top) {
             const topBadge = document.createElement('div');
             topBadge.className = 'top-badge';
@@ -105,7 +105,7 @@ const createBeerCards = () => {
     });
     
     updateSearchCount(beers.length);
-    console.log('✅ Brahma e Boa estão no TOPO do cardápio! 🔥');
+    console.log('✅ Cardápio com imagens carregado!');
 };
 
 // ========== SISTEMA DE BUSCA/FILTRO ==========
@@ -265,7 +265,7 @@ const addCurrentYear = () => {
     }
 };
 
-// ========== FIX PARA SAFARI (100vh issue) ==========
+// ========== FIX PARA SAFARI ==========
 const fixSafariVH = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -275,15 +275,13 @@ const fixSafariVH = () => {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Avenida Pub Bocaina - Inicializando...');
     
-    // Mostra skeleton screen
     showSkeleton();
     
-    // Simula carregamento
     setTimeout(() => {
         createBeerCards();
         animateOnScroll();
         hideSkeleton();
-        console.log('✅ Cardápio carregado! Brahma e Boa estão no TOPO 🔥');
+        console.log('✅ Cardápio com imagens carregado! Brahma e Boa são as mais pedidas 🔥');
     }, 800);
     
     backToTopButton();
