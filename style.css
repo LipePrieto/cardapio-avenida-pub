@@ -76,7 +76,7 @@ body[data-theme="light"] .footer {
 
 /* ========== HERO COM FOTO PERSONALIZADA ========== */
 .hero-with-image {
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('../images/fachada.webp');
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('images/fachada.webp');
     background-size: cover;
     background-position: center 30%;
     background-repeat: no-repeat;
